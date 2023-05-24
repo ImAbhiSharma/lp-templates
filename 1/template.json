@@ -1,3 +1,6 @@
 {
-    "name": ""
+  "name": "1",
+  "css": [
+    "public/style.css"
+  ]
 }

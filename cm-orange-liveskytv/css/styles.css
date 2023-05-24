@@ -1,0 +1,238 @@
+body{
+    margin:0;
+    padding:0 0 50px 0;
+    background-color: #171614;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input{
+    appearance: none;
+}
+
+.lp-content{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 480px;
+    text-align: center;
+}
+
+.lp-header{
+    width: 100%;
+}
+
+.lp-main{
+    text-align: center;
+}
+
+.lp-main-title{
+    color:#fefefe;
+    font-size: 28px;
+}
+
+.lp-main-price{
+    color:#797979;
+    font-size: 15px;
+}
+
+.lp-btn{
+    width: 85%;
+    height: 65px;
+    display: flex;
+    margin:0 auto;
+    color:#000000;
+    font-size: 26px;
+    font-weight: bold;
+    align-items: center;
+    border-radius: 65px;
+    text-decoration: none;
+    justify-content: center;
+    border:2px solid #ffffff;
+    background-color: #ffeb3b;
+}
+
+.lp-form-btn{
+    width: 85%;
+    height: 65px;
+    display: flex;
+    margin:0 auto;
+    color:#000000;
+    font-size: 26px;
+    font-weight: bold;
+    align-items: center;
+    border-radius: 65px;
+    text-decoration: none;
+    justify-content: center;
+    border:2px solid #171614;
+    background-color: #ffeb3b;
+}
+
+
+.lp-link-text{
+    color:#797979;
+    font-size: 15px; 
+}
+
+.lp-link-text a{
+    color:inherit;
+}
+
+.lp-lang-btn{
+    padding: 10px;
+    color:#afafaf;
+    font-weight: bold;
+    margin: 10px auto;
+    border-radius: 10px;
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+    justify-content: center;
+    background-color: #393939;
+}
+
+.lp-lang-btn-flag{
+    width: 35px;
+    margin-right: 10px;
+}
+
+.lp-form-wrap{
+    margin:10px;
+    display: block;
+    min-height: 218px;
+    border-radius: 15px;
+    padding-bottom: 20px;
+    border:1px solid #ffffff;
+    background-color: #ffffff;
+}
+
+.lp-congrats-wrap{
+    margin:10px;
+    padding: 10px;
+    display: flex;
+    min-height: 218px;
+    align-items: center;
+    border-radius: 15px;
+    flex-direction: column;
+    justify-content: center;
+    border:1px solid #ffffff;
+    background-color: #ffffff;
+}
+
+.lp-congrats-wrap .ribbon{
+    width: 70px;
+    margin-bottom: 10px;
+}
+
+.lp-congrats-wrap h2{
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.lp-congrats-wrap p{
+    margin: 0;
+    font-size: 18px; 
+}
+
+.lp-form-wrap-title{
+    color:#fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 10px;
+    background-color:#171614;
+    border-radius: 14px 14px 0 0;
+}
+
+.lp-inner-wrap{
+    display: flex;
+    font-size: 36px;
+    font-weight: bold;
+    min-height: 160px;
+    align-items: center;
+    justify-content: center;
+}
+
+.lp-form-wrap form{
+    padding: 10px;
+}
+
+.lp-phone-input-wrap{
+    width: 280px;
+    display: flex;
+    margin: 10px auto;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    border:1px solid #171614;
+}
+
+.lp-phone-input-wrap span{
+    color:#fff;
+    padding: 15px;
+    font-size: 24px;
+    border-radius: 9px 0 0 9px;
+    background-color: #303030;
+}
+
+.lp-phone-entry{
+    border:none;
+    width: 178px;
+    outline: none;
+    padding: 10px;
+    color:#303030;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.lp-pin-entry{
+    width: 250px;
+    outline: none;
+    padding: 15px;
+    color:#303030;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px auto;
+    text-align: center;
+    border-radius: 10px;
+    border:1px solid #171614;
+    background-color: transparent;
+}
+
+.lp-error-msg{
+    color:red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.lp-disclaimer{
+    padding: 10px;
+    color:#797979;
+    font-size: 15px; 
+    text-align: left;
+    line-height: 1.25em;
+    margin-bottom: 20px;
+}
+
+.lp-disclaimer a,
+.lp-disclaimer span{
+    color:#fff;
+}
+
+.lp-terms-link{
+    color:#797979;
+}
+
+.state{
+    display: none;
+}
+
+.lp-main.show-all .state{
+    display: block;
+}
+
+.lp-main.show-0 .view-0,
+.lp-main.show-1 .view-1,
+.lp-main.show-2 .view-2,
+.lp-main.show-3 .view-3,
+.lp-main.show-4 .view-4{
+    display: block;
+}

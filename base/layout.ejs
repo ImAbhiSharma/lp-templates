@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title id="content-TITLE">Regardez en direct maintenant</title>
+  <link rel="icon" href="/videos/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <? for(let style of styles) { ?>
+    <link rel="stylesheet" href="/public/<?=style.css?>" />
+  <? } ?>
+  <? for(let script of scripts) { ?>
+  <script type="text/javascript"><?=script?></script>
+  <? } ?>
+  <script><?-include('./vms.js')?></script>
+</head>
