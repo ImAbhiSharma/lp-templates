@@ -29,6 +29,7 @@
         vms.selectors.error.innerHTML = message
         vms.selectors.error.style.display = 'block'
         this.vibrate(vms.selectors.subscribe)
+        this.vibrate(vms.selectors.error)
         // alert(message)
       },
       vibrate(selector) {
@@ -118,7 +119,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
               <div class="lp-form-wrap-title" data-content="ENTER_MSISDN_GET_CODE"></div>
 
               <div class="lp-phone-input-wrap">
-              <span>+211</span> <input type="tel" maxlength="10" id="msisdn_input" class="lp-phone-entry"/>
+              <span>+{{settings.isd}}</span> <input type="tel" maxlength="10" id="msisdn_input" class="lp-phone-entry"/>
               </div>
               <button class="lp-form-btn" id="subscribe" onclick="vms.sendOTP()" data-content="SUBSCRIBE"></button>
 
