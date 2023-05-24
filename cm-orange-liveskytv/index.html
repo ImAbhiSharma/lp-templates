@@ -12,27 +12,24 @@
       selectors: {
         menu: '.menu',
         loader: '#loader',
-        msisdn_input: '#msisdn-input',
+        msisdn_input: '#msisdn_input',
         otp_input: '#otp-input',
         error: '#error',
         lang_btn: '#lang_btn',
         lang_flag: '#lang_flag',
-        subscribe_btn: '#subscribe_btn'
+        subscribe: '#subscribe'
       },
       init: function() {
         vms.init()
       },
-      toggleMenu() {
-        vms.selectors.menu.classList.toggle('active')
-      },
       onFlowChange(flow, step) {
 
       },
-      showError(reason, message) {
-        this.selectors.error.innerText = message
-        this.selectors.error.style.display = 'block'
-        this.vibrate(this.selectors.error)
-        alert(message)
+      showError(message, reason) {
+        vms.selectors.error.innerHTML = message
+        vms.selectors.error.style.display = 'block'
+        this.vibrate(vms.selectors.subscribe)
+        // alert(message)
       },
       vibrate(selector) {
         selector.classList.add('vibration')
@@ -79,11 +76,13 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
       <div class="lp-main show-all">
 
-          <div id="loader" style="color: white; padding: 10px; display: none">
+          <div id="loader" class="loader" style=" display: none">
             Loading ...
           </div>
+          
+          <div class="lp-error-msg" id="error"></div>
 
-          <div class="state view-0" id="flow-he-1">
+          <div class="state view-0" data-flow-step="he-1">
 
               <h1 class="lp-main-title">
                 <span data-content="WELCOME"></span>
@@ -91,40 +90,49 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
               <p class="lp-main-price" data-content="PRICING"></p>
 
-              <a href="javascript:void(0)" class="lp-btn" id="subscribe_btn" onclick="vms.subscribe()" data-content="SUBSCRIBE"></a>
-              <div class="lp-error-msg" id="error"></div>
+              <a href="javascript:void(0)" class="lp-btn" id="subscribe" onclick="vms.subscribe()" data-content="SUBSCRIBE"></a>
+
+              <!-- <p class="lp-link-text"><a href="">Click Here</a> to subscribe to the service!</p> -->
+
+          </div>
+
+          <div class="state view-0" data-flow-step="he-2">
+
+              <h1 class="lp-main-title">
+                <span data-content="WELCOME"></span>
+              </h1>
+
+              <p class="lp-main-price" data-content="PRICING"></p>
+
+              <a href="javascript:void(0)" class="lp-btn" id="subscribe" onclick="vms.subscribe()" data-content="CONFIRM"></a>
+
               <!-- <p class="lp-link-text"><a href="">Click Here</a> to subscribe to the service!</p> -->
 
           </div>
 
 
-          <div class="state view-1" id="flow-otp-1">
+          <div class="state view-1" data-flow-step="otp-1">
 
               <div class="lp-form-wrap">
 
               <div class="lp-form-wrap-title" data-content="ENTER_MSISDN_GET_CODE"></div>
 
               <div class="lp-phone-input-wrap">
-              <span>+211</span> <input type="tel" maxlength="10" class="lp-phone-entry"/>
+              <span>+211</span> <input type="tel" maxlength="10" id="msisdn_input" class="lp-phone-entry"/>
               </div>
-
-              <!-- <div class="lp-error-msg">Error message here.</div> -->
-
-              <button class="lp-form-btn">Continue</button>
+              <button class="lp-form-btn" id="subscribe" onclick="vms.sendOTP()" data-content="SUBSCRIBE"></button>
 
               </div>
 
           </div>
 
-          <div class="state view-2" id="flow-otp-2">
+          <div class="state view-2" data-flow-step="otp-2">
 
               <div class="lp-form-wrap">
 
                   <div class="lp-form-wrap-title">Enter 4 valid PIN</div>
 
                   <input type="tel" maxlength="4" class="lp-pin-entry" placeholder="****"/>
-
-                  <div class="lp-error-msg">Error message here</div>
 
                   <button class="lp-form-btn">Continue</button>
 
@@ -148,7 +156,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
           </div> -->
 
-          <div class="state view-4" id="flow-success">
+          <div class="state view-4" data-flow-step="success">
 
               <div class="lp-congrats-wrap">
 
@@ -165,10 +173,16 @@ _#/|##########/\######(   /\   )######/\##########|\#_
       </div>
 
 
+
+
       <a href="javascript:void(0)" class="lp-lang-btn" id="lang_btn" onclick="vms.switchLocale()">
         <img alt="" id="lang_flag" class="lp-lang-btn-flag"/>
         <span data-content="$getAltLocale.name"></span>
       </a>
+
+      <div style="margin-top:10px">
+        <a href="" class="lp-terms-link" data-content="TERMS_TITLE"></a>
+      </div>
 
       <div class="lp-disclaimer" data-content="TERMS">
 
@@ -176,7 +190,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
       </div>
 
-      <a href="" class="lp-terms-link">Terms &amp; Conditions</a>
+
 
   </div>
 
