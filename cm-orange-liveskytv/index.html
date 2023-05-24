@@ -79,7 +79,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
           <div id="loader" class="loader" style=" display: none">
             Loading ...
           </div>
-          
+
           <div class="lp-error-msg" id="error"></div>
 
           <div class="state view-0" data-flow-step="he-1">
@@ -130,11 +130,11 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
               <div class="lp-form-wrap">
 
-                  <div class="lp-form-wrap-title">Enter 4 valid PIN</div>
+                  <div class="lp-form-wrap-title" data-content="ENTER_OTP"></div>
 
                   <input type="tel" maxlength="4" class="lp-pin-entry" placeholder="****"/>
 
-                  <button class="lp-form-btn">Continue</button>
+                  <button class="lp-form-btn" data-content="CONFIRM" id="subscribe"></button>
 
               </div>
 
@@ -162,9 +162,15 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
                   <img src="./imgs/ribbon.png" alt="" class="ribbon"/>
 
-                  <h2>CONGRATULATIONS!</h2>
+                  <h2 data-content="CONGRATULATIONS"></h2>
 
-                  <p>You’ve been subscribe to the service</p>
+                  <p data-content="WELCOME_THANK_YOU"></p>
+
+                  <div style="margin-top:20px">
+                    <button class="lp-form-btn" style="font-size:16px;" onclick="vms.redirectToContent()">
+                      <span data-content="ACCESS_CONTENT"></span>
+                    </button>
+                  </div>
 
               </div>
 
