@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+nav{
+    background-color: rgba(216, 4, 4, 0.89);
+    display: flex;
+    justify-content: flex-start;
+}
+
+nav img{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section{
+    /* width: 100vw;
+    margin: auto; */
+    background-color: black;
+    color: white;
+}
+
+#bgImage{
+    background-image: url(/foot/images/bgImage.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 700px;
+}
+
+#bgText{
+    text-align: center;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bgText h1{
+    font-size: 5rem;
+    color: white;
+}
+
+#bgText h4{
+    font-size: 2rem;
+    color: white;
+}
+
+.container{
+    /* width: 100vw; */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container h2{
+    font-size: 3rem;
+}
+
+.container h4{
+    font-size: 1.2rem;
+}
+
+#cardContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+#cardContainer button{
+    background-color: red;
+    color: white;
+    padding: 0.4rem;
+    border: none;
+}
+
+.card{
+    width: 18rem;
+    height: 28rem;
+    padding: 1rem;
+    color: black;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+}
+
+.card img{
+    width: 100%;
+    background-color: black;
+}
+
+.cardText{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.container input{
+    height: 3rem;
+    width: 28rem;
+    font-size: 1.1rem;
+    padding: 0rem 1rem;
+    border-radius: 2px;
+}
+
+#last button{
+    margin-top: 10px;
+    /* height: 2.5rem; */
+    /* width: 28rem; */
+    padding: 1rem;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#last{
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.inpText{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 150px;
+}
+
+.footer{
+    height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}

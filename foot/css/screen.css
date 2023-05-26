@@ -1,0 +1,70 @@
+@media screen and (max-width: 768px) {
+    nav{
+        justify-content: center;
+    }
+    #bgText h1{
+        font-size: 3.5rem;
+    }
+    #bgText h4{
+        font-size: 1.5rem;
+    }
+    .container h2{
+        font-size: 2rem;
+    }
+    .footer{
+        height: 150px;
+    }
+  }
+  
+@media screen and (max-width: 500px) {
+    .container input{
+        /* height: 3rem */
+        width: 20rem;
+        
+    }
+    #last button{
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+    .footer{
+        height: 180px;
+    }
+  }
+  
+@media screen and (max-width: 425px) {
+    #bgImage{
+        height: 500px;
+    }
+    nav img{
+        width: 250px;
+    }
+    #bgText h1{
+        font-size: 2rem;
+        color: white;
+    }
+    
+    #bgText h4{
+        font-size: 1rem;
+        color: white;
+    }
+    .container h2{
+        font-size: 1.4rem;
+    }
+    .container input{
+        height: 2.5rem;
+        width: 16rem;
+        
+    }
+    #last button{
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+  }
+@media screen and (max-width: 375px) {
+    .card{
+        width: 15rem;
+        /* height: 28rem; */
+        padding: 0.6rem;
+    }
+  }
+  

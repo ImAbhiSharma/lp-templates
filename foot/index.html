@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footballer Star</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/screen.css">
+</head>
+<body>
+
+
+    <nav>
+        <img src="./images/logo.png" alt="">
+        
+    </nav>
+
+    <section id="bgImage">
+        <div id="lang">
+
+            <select class="lang-select">
+                <option value="en" language="English" class="active">EN</option>
+                <option value="es" language="español">ES</option>
+            </select>
+    
+        </div>
+        
+        <div id="bgText">
+            <h1 id="top-text-1">Let's Join Our Team</h1>
+            <br>
+            <h4 id="top-text-2">The Best Football Academy</h4>
+        </div>
+        
+    </section>
+
+    <section>
+        
+        <div class="container">
+        
+            <div >
+                <h2>Recent Posts</h2>
+            </div>
+            
+            <br>
+        
+            <div id="cardContainer">
+            
+                <div class="card">
+                    <img src="./images/football.png" alt="">
+                    <div class="cardText">
+                        <h4>LOREM IPSUM SIT</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe necessitatibus accusantium libero minima quod, dignissimos voluptas incidunt..</p>
+                        <button>Read More</button>
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <img src="./images/football.png" alt="">
+                    <div class="cardText">
+                        <h4>LOREM IPSUM SIT</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe necessitatibus accusantium libero minima quod, dignissimos voluptas incidunt..</p>
+                        <button>Read More</button>
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <img src="./images/football.png" alt="">
+                    <div class="cardText">
+                        <h4>LOREM IPSUM SIT</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe necessitatibus accusantium libero minima quod, dignissimos voluptas incidunt..</p>
+                        <button>Read More</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        
+    </section>
+
+    <section>
+        
+        <div class="container" id="last">
+            <div>
+                <h2 id="middle-text-1">OVER 60 NEW EXCLUSIVE FOOTBALL VIDEOS</h2>
+            </div>
+            <div class="inpText">
+                <input type="tel" placeholder="+965- XXXXXXXXXX">
+                <button>Subscribe Now</button>
+                <p id="middle-text-2">Daily Plan @5EGP</p>
+            </div>
+
+            <div class="footer">
+                <h3>Terms And Conditions</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam cumque harum, obcaecati, odio sint</p>
+            </div>
+        </div>
+
+    </section>
+
+    
+    <script>
+        
+        {
+    
+            const langE1 = document.querySelector('.lang-select')
+            const link = document.querySelectorAll('*')
+            
+            const toptext1E1 = document.querySelector('.top-text-1')
+            const toptext2E1 = document.querySelector('.top-text-2')
+            const middletext1E1 = document.querySelector('.middle-text-1')
+            const  iconarrowrightE1 = document.querySelector('.icon-arrow right')
+            const middletext2E1 = document.querySelector('middle-text-2')
+            const footerE1 = document.querySelector('footer')
+    
+    
+            langE1.addEventListener('change', (event)=>{
+    
+                const lang = event.target.value
+    
+                // alert(lang);
+    
+                link.forEach(el => {
+                    //
+                    if( data[lang][el.id] ){
+    
+                    el.innerHTML = data[lang][el.id];
+                    }
+                })
+    
+            })
+    
+            link.forEach(el => {
+                el.addEventListener('click' , () =>{
+                    langE1 = querySelector('.active').classList.remove('active');
+                    el.classList.add('active');
+                    const attr = el.getAttribute('language');
+    
+                    toptext1E1.textContent = data[attr].top-text-1;
+                    toptext2E1.textContent =  data[attr].top-text-2;
+                    middletext1E1.textContent =  data[attr].middle-text-1;
+                    iconarrowrightE1.textContent = data[attr].icon-arrowright;
+                    middletext2E1.textContent = data[attr].middle-text-2;
+    
+                })
+            });
+    
+            var data = {
+            "en":
+            {
+                "top-text-1": "Let's Join Our Team", 
+                "top-text-2": "The best football academy",
+                "middle-text-1": "Over 60 new exclusive videos",
+                "icon-arrow right": "Enter your mobile number and access",
+                "middle-text-2": "Daily Plan @5EGP",
+                "footer": " - Terms & Conditions click here"
+            },
+    
+            "es":
+            {
+                "top-text-1": "Unámonos a nuestro equipo",
+                "top-text-2": "la mejor academia de futbol",
+                "middle-text-1": "más de 60 nuevos videos exclusivos",
+                "icon-arrow right": "Introduce tu número de móvil y accede",
+                "middle-text-2": "Plan diario @5EGP",
+                "footer": " - Términos y condiciones haga clic"
+            },
+            }
+        }
+    
+    </script>
+    
+</body>
+</html>
