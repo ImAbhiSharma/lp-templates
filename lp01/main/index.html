@@ -1,0 +1,872 @@
+<html>
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>lp01</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="style.css">
+    <script src="../../cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        vms.lp = {
+          selectors: {
+            menu: '.menu',
+            loader: '#loader',
+            msisdn_input: '#msisdn_input',
+            otp_input: '#otp-input',
+            error: '#error',
+            lang_btn: '#lang_btn',
+            lang_flag: '#lang_flag',
+            subscribe: '#subscribe'
+          },
+          init: function() {
+            vms.init()
+          },
+          onFlowChange(flow, step) {
+    
+          },
+          showError(message, reason) {
+            vms.selectors.error.innerHTML = message
+            vms.selectors.error.style.display = 'block'
+            this.vibrate(vms.selectors.subscribe)
+            this.vibrate(vms.selectors.error)
+            // alert(message)
+          },
+          vibrate(selector) {
+            selector.classList.add('vibration')
+            setTimeout(() => selector.classList.remove('vibration'), 3000)
+          },
+          onLocaleChange(lang, locale, altLocale) {
+            vms.selectors.lang_flag.setAttribute('src', `./imgs/${altLocale.country_code}.png`)
+          }
+        }
+        </script>
+
+
+    
+
+
+    <script>
+        var input = '';
+        $(function () {
+            var options = {
+                activeClass: 'active',
+                correctClass: 'correct',
+                correctEntry: '1738',
+                correctGuideId: 'secure_key',
+                entryDigitClass: 'dot',
+                generatorId: 'generator',
+                guideInputId: 'guide',
+                incorrectClass: 'wrong',
+                inputAnimationLength: 900,
+                keypadNumberClass: 'number',
+                keyPressAnimationLength: 1000,
+                keyPressClass: 'grow',
+                pinCaseId: 'pin',
+            };
+            var max = 0;
+            var numbers = document.querySelectorAll('.' + options.keypadNumberClass);
+            var element = '';
+            var msisdn = !!document.getElementById("msisdn");
+            if (msisdn) {
+                document.getElementById("msisdn").readOnly = true;
+                input = document.getElementById("msisdn").value;
+                element = document.querySelector('#msisdn');
+                max = document.getElementById("msisdn").maxLength;
+            }
+
+            var pin = !!document.getElementById("pin");
+            if (pin) {
+                document.getElementById("pin").readOnly = true;
+                element = document.querySelector('#pin');
+                max = document.getElementById("pin").maxLength;
+            }
+
+            const e = new Event("change");
+            numbers = Array.prototype.slice.call(numbers);
+            var backspace = !!document.getElementById("backspace");
+            if (backspace) {
+                document.getElementById("backspace").addEventListener("click", function () {
+                    input = input.substr(0, input.length - 1);
+
+                    var msisdn = !!document.getElementById("msisdn");
+                    if (msisdn) {
+                        document.getElementById("msisdn").value = input;
+                    }
+                    var pin = !!document.getElementById("pin");
+                    if (pin) {
+                        document.getElementById("pin").value = input;
+                    }
+                    element.dispatchEvent(e);
+                });
+            }
+
+
+            (function () {
+                window.addEventListener('keyup', function (event) {
+                    var number = mapKeyChar(event.keyCode);
+                    if (number === undefined) return;
+                    if (number === -1) number = 9;
+                    numbers[number].click();
+                });
+            })();
+            function mapKeyChar(char) {
+
+                if (max > 0 && input.length > max) {
+                    return
+                }
+
+                element.dispatchEvent(e);
+
+
+                if (char < 106 && char > 95) {
+                    return char - 97;
+                }
+
+                if (char === 8 && input.length) {
+                    input = input.substr(0, input.length - 1);
+                    var msisdn = !!document.getElementById("msisdn");
+                    if (msisdn) {
+                        document.getElementById("msisdn").value = input;
+                    }
+                    var pin = !!document.getElementById("pin");
+                    if (pin) {
+                        document.getElementById("pin").value = input;
+                    }
+                    return;
+                }
+                // Rotate the pad on arrow left/right press.
+                if (char === 37 || char === 39) {
+                    return;
+                }
+                // The pressed key is out of the desired input range.
+                if (char < 48 || char > 57) {
+                    return;
+                }
+
+                return char - 49;
+            }
+            numbers.forEach(function (number, index) {
+                number.addEventListener('click', function () {
+
+                    if (max > 0 && input.length >= max) {
+                        return true;
+                    }
+
+                    element.dispatchEvent(e);
+                    if (this.id == "continue") {
+                        return true;
+                    }
+                    // Animates the key press.
+                    // toggleClass(options.keyPressClass, number, options.keyPressAnimationLength);
+                    // Adds the current value to the input.
+                    if (index === 9) index = -1;
+                    input += (index + 1);
+
+                    var msisdn = !!document.getElementById("msisdn");
+                    if (msisdn) {
+                        document.getElementById("msisdn").value = input;
+                    }
+                    var pin = !!document.getElementById("pin");
+                    if (pin) {
+                        document.getElementById("pin").value = input;
+                    }
+                });
+            });
+
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var noPin = !!document.getElementById("pin_pad");
+            if (!noPin) {
+                var frmWrap = document.querySelector(".formWrap");
+                frmWrap.classList.add("no_pin");
+            } else {
+                console.log('no_pin');
+            }
+        });
+
+        const layout = "ar_layout";
+        $(function () {
+            layout == "ar_layout" ?
+                document.getElementsByTagName("html")[0].classList.add("ar_layout") :
+                "";
+
+            const aeTnc = document.getElementById("ae_tnc").innerHTML;
+            aeTnc == "" ?
+                (document.getElementById("ae_tnc").style.display = "none") :
+                (document.getElementById("ae_tnc").style.display = "block");
+
+            const select = document.getElementsByTagName("select");
+            pin = document.getElementsByClassName("pin");
+            let select_option = true;
+            const maxValue = $(".msisdn").attr("maxlength") - 1;
+            pinMaxVal = $(".pin").attr("maxlength") - 1;
+
+            withoutSelect();
+
+            function withoutSelect() {
+                if ($(".msisdn").length > 0) {
+                    $(".msisdnArrow").show();
+                    $(".btnArrow").hide();
+                } else if ($(".button").length == 1) {
+                    $(".btnArrow").show();
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                    $(".msisdnArrow").hide();
+                } else {
+                    $(".msisdnArrow, .btnArrow").hide();
+                }
+            }
+
+            $("#msisdn").change(function () {
+                if ($(this).val().length >= maxValue) {
+                    $(".btnArrow").show();
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                    $(".msisdnArrow").hide();
+                } else if ($(this).val().length <=
+                    maxValue) { //if remove the input value the tick would hide and the input will glow
+                    $(".msisdnArrow").show();
+                    $(".btnArrow").hide();
+                    var str = $('.button').attr('class');
+                    var n = str.includes("disabled_btn");
+
+
+                    if (n == false) {
+                        $(".button").addClass("disabled_btn").prop('disabled', true);
+                    }
+                }
+            });
+
+            $(".msisdn").keydown(function () {
+                $("#msisdn").trigger('change');
+            });
+
+            $(".pin").keydown(function () {
+                if ($(this).val().length >= pinMaxVal) {
+                    $(".btnArrow").show();
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                    $(".msisdnArrow").hide();
+                } else if ($(this).val().length <= pinMaxVal) {
+                    $(".msisdnArrow").show();
+                    $(".btnArrow").hide();
+                }
+            });
+
+            $("a.display_1").click(function () {
+                select.length > 0 ? withSelect() : withoutSelect();
+            });
+        });
+    </script>
+    <script>
+        function get_transaction_id() {
+            let url_string = window.location.href
+            let url = new URL(url_string);
+            return url.searchParams.get("transaction_id");
+        }
+
+        // Actel protection script
+        var script = document.createElement('script');
+        script.addEventListener('load', function () {
+            var event = new Event('DCBProtectRun');
+            document.dispatchEvent(event);
+        });
+        script.type = 'text/javascript';
+        script.src = '//api.actelme.com/api/protection/script?appid=4488&opid=41&clickid=' + get_transaction_id() + '&selector=%23button&country=AE&mode=1';
+        //
+
+        let url_string = window.location.href
+        let url = new URL(url_string);
+        let lang = url.searchParams.get("lang");
+        var global_lang = "ar"
+
+        $(document).ready(function () {
+            // Actel protection script
+            // document.head.appendChild(script);
+
+            if (lang) {
+                global_lang = lang;
+                lang_change(lang);
+            }
+            else lang_change(global_lang);
+        });
+
+        function lang_change(language) {
+            let url_string = window.location.href
+            let url = new URL(url_string);
+
+            url.searchParams.set("lang", language);
+            window.history.replaceState(null, null, url.search);
+
+            global_lang = language;
+
+            switch (language) {
+                case "ar":
+                    $("html").attr("class", "ar_layout");
+                    $("#lang_button_ar").hide();
+                    $("#lang_button_en").show();
+
+                    $("#ae_tnc").html("اتصالات: فترة مجانية مدتها 24 ساعة ثم 12 درهم أسبوعياً. دو: 12.6 درهم أسبوعياً. السعر يشمل الضريبة المضافة");
+                    $("#text-text-1").html("جديد! محتويات إضافية وألعاب");
+                    $("#text-text-2").html("إحصل على وصول فوري الآن!");
+                    $("#instruction").html("أدخل رقم هاتفك المحمول للمتابعة");
+                    $("#button").val("إشترك!");
+                    $("#text-rate").html("اتصالات: فترة مجانية مدتها 24 ساعة ثم 11 درهم في الأسبوع. دو: 12.6 درهم في الاسبوع. السعر يشمل الضريبة المضافة");
+                    $("#text-tnc-1").html("<center>ألشروط والاحكام: • لمشتركي اتصالات فترة مجانية مدتها 24 ساعة ثم 12 درهم في الأسبوع تلقائيا. • لا إلتزام لمشتركي اتصالات، لمشتركي اتصالات يمكنك إلغاء اشتراكك في أي وقت بإرسال STOP GZ إلى 1741. • التجربة المجانية صالحة فقط للمشتركين اتصالات الجدد. • لمشتركي اتصالات استمتع بالفترة المجانية لمدة 24 ساعة. • للمساعدة، الرجاء التواصل معنا cs@puretechglobal.com<center/>");
+                    $("#text-tnc-link-text").html("<center>•	للمزيد من المعلومات اضغط على هذا <B><u>الرابط<u><B><center/>");
+
+                    $("#txt-msisdn-error").html("Please enter a valid MSISDN");
+                    $("#txt-request-error").html("Request failed, please try again");
+                    $("#txt-pin-error").html("PIN request failed, please try again");
+                    $("#txt-no-service-error").html("Sorry! The service is not available for this MSISDN");
+
+                    break;
+                case "en":
+                default:
+                    $("html").attr("class", "");
+                    $("#lang_button_ar").show();
+                    $("#lang_button_en").hide();
+
+                    $("#ae_tnc").html("Etisalat: 24 Hours free, then 12 AED per week. DU: 12.6 AED per week. VAT included");
+                    $("#text-text-1").html("New! Content plus apps & games");
+                    $("#text-text-2").html("Get instant access now!");
+                    $("#instruction").html("Enter your mobile number to continue");
+                    $("#button").val("Subscribe!");
+                    $("#text-rate").html("Etisalat: 24 Hours free, then 11 AED per week. DU: 12.6 AED per week. VAT included");
+                    $("#text-tnc-1").html("<center>Terms and Conditions: • For Etisalat users Free for 24 hours then, you will be charged 12 AED per week automatically. • No commitment for Etisalat users, you can cancel any time by sending STOP GZ to 1741 • Free trial applicable only for first time Etisalat subscribers only. • For Etisalat users enjoy your Free trial for 24 hours. • For support / full T&C, please email us at cs@puretechglobal.com<center/>");
+                    $("#text-tnc-link-text").html("<center>• Or click on this link <u><b>T&C<b><u><center/>");
+
+                    $("#txt-msisdn-error").html("Please enter a valid MSISDN");
+                    $("#txt-request-error").html("Request failed, please try again");
+                    $("#txt-pin-error").html("PIN request failed, please try again");
+                    $("#txt-no-service-error").html("Sorry! The service is not available for this MSISDN");
+
+                    break;
+            }
+        }
+
+        window.onload = function () {
+            view();
+        }
+
+        function get_tracking_id() {
+            let url_string = window.location.href
+            let url = new URL(url_string);
+            return url.searchParams.get("tracking_id");
+        }
+
+        function view() {
+            let api_url = 'https://prod.api.puretechglobal.net/lp/view';
+
+            let tracking_data = {
+                "tracking_id": get_tracking_id()
+            };
+
+            tracking_data = JSON.stringify(tracking_data);
+
+            let jqxhr = $.ajax({
+                type: "POST",
+                url: api_url,
+                data: tracking_data,
+                contentType: "application/json",
+            });
+
+            return new Promise((resolve, reject) => {
+                jqxhr.done(function (result) {
+                    if (result.status == "success") {
+                        if (result.data && result.data.tracking_id) {
+                            let url_string = window.location.href
+                            let url = new URL(url_string);
+
+                            url.searchParams.set("tracking_id", result.data.tracking_id);
+                            window.history.replaceState(null, null, url.search);
+                        }
+                    }
+                    resolve(result);
+                });
+
+                jqxhr.fail(function (result) {
+                    console.warn('View API Error');
+                    reject(result);
+                });
+            });
+        }
+
+        function create_lead() {
+            var xhttp = new XMLHttpRequest();
+            var api_url = 'https://prod.api.puretechglobal.net/lead/atlas_testing';
+
+            var params = {
+                function_name: "trackingLP_lead",
+                tracking_id: get_tracking_id(),
+                country: window.country,
+                gateway: window.gateway,
+                telco: window.telco,
+                shortcode: window.sc,
+                keyword: window.kw,
+                msisdn: window.msisdn
+            };
+
+            return new Promise((resolve, reject) => {
+                xhttp.onreadystatechange = (e) => {
+                    if (xhttp.readyState !== 4) {
+                        return;
+                    }
+
+                    if (xhttp.status === 200) {
+                        console.log('SUCCESS', xhttp.responseText);
+                        resolve(JSON.parse(xhttp.responseText));
+                    } else {
+                        console.warn('request_error');
+                        reject(e);
+                    }
+                };
+                xhttp.open("POST", api_url);
+                xhttp.send(JSON.stringify(params))
+            });
+        }
+
+        var arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
+
+        arNumberToen = function (str) {
+            if (typeof str === 'string') {
+                for (var i = 0; i < 10; i++)
+                    str = str.replace(arabicNumbers[i], i);
+            }
+            return str;
+        };
+
+        function get_msisdn() {
+            var msisdn = $("#msisdn").val()
+            msisdn = msisdn.replace("+", "");
+            var check = 0;
+            if (typeof input !== 'undefined') {
+                check = 1;
+            }
+            var country_code = '971';
+            var length = 12;
+            if (msisdn.length > length || msisdn.length < (length - country_code.length)) {
+                if (check == 1) {
+                    input = '971';
+                }
+                $("#msisdn").val("");
+                $("#msisdn").focus();
+                return false;
+            }
+            else {
+                if ((msisdn.substr(0, country_code.length) == country_code) && (msisdn.length >= (length - country_code.length) && msisdn.length < length)) {
+                    if (check == 1) {
+                        input = '971';
+                    }
+                    $("#msisdn").val("");
+                    $("#msisdn").focus();
+                    return false;
+                }
+                else {
+                    var max_cc_length = country_code.length;
+                    for (var i = 0; i <= country_code.length; i++) {
+                        if (msisdn.length == length) {
+                            if (msisdn.substr(0, max_cc_length) == country_code.substr(i, length)) {
+                                msisdn = country_code.substr(0, i) + msisdn;
+                            }
+                            else {
+                                alert('msisdn length and entered not same');
+                                if (check == 1) {
+                                    input = '971';
+                                }
+                                $("#msisdn").val("");
+                                $("#msisdn").focus();
+                                return false;
+                            }
+                        }
+                        length--;
+                        max_cc_length--;
+                    }
+                }
+            }
+            return msisdn
+        }
+
+        function pin_request() {
+
+            if (window.gateway == "actel") {
+                pinData = {
+                    tracking_id: get_tracking_id()
+                };
+
+                jqxhr = $.ajax({
+                    type: "POST",
+                    url: "https://prod.gateway.puretechglobal.net/sms_api_hub_process/pin_request/actel/uae",
+                    data: pinData
+                });
+            }
+            else {
+                pinData = {
+                    tracking_id: get_tracking_id(),
+                    msisdn: window.msisdn,
+                    lang: global_lang
+                };
+
+                jqxhr = $.ajax({
+                    type: "GET",
+                    url: "https://prod.gateway.puretechglobal.net/sms_api_hub_process/pin_request/mondiamedia/all",
+                    data: pinData
+                });
+            }
+
+            return new Promise((resolve, reject) => {
+                jqxhr.done(function (result) {
+                    console.log(result);
+                    if (result.result == "SUCCESS") {
+                        resolve(result);
+                    }
+                    else {
+                        console.warn('PIN request failed.');
+                        reject(result);
+                    }
+                });
+                jqxhr.fail(function (result) {
+                    console.warn('PIN request failed.');
+                    reject(result);
+                });
+            });
+        }
+
+        function get_service_details(msisdn) {
+            let hlrData = {
+                "msisdn": msisdn,
+                "provider": "moceansms",
+                "gateway_id": 63
+            };
+
+            hlrData = JSON.stringify(hlrData);
+
+            let jqxhr = $.ajax({
+                type: "POST",
+                url: "https://prod.api.puretechglobal.net/hlr/hlr_lookup",
+                data: hlrData,
+                contentType: "application/json",
+            });
+
+            return new Promise((resolve, reject) => {
+                jqxhr.done(function (result) {
+                    let kw = {
+                        "42402": {
+                            gateway: "mondiamedia",
+                            telco: "etisalat",
+                            shortcode: "1741",
+                            keyword: "gz"
+                        },
+                        // "42403": {
+                        //     gateway: "actel",
+                        //     telco: "du",
+                        //     shortcode: "1561",
+                        //     keyword: "sf"
+                        // },
+                    };
+
+                    if (result.status == "success") {
+                        window.telco = result.telco;
+
+                        if (window.telco in kw) {
+                            window.gateway = kw[window.telco]["gateway"];
+                            window.sc = kw[window.telco]["shortcode"];
+                            window.kw = kw[window.telco]["keyword"];
+                            window.telco = kw[window.telco]["telco"];
+                        }
+                    }
+
+                    resolve(result);
+                });
+
+                jqxhr.fail(function (result) {
+                    console.warn('get telco error');
+                    reject(result);
+                });
+            });
+        }
+
+        function sub_frm() {
+            window.msisdn = get_msisdn();
+            window.country = "uae";
+
+            let offer_path = '/143/downloadwhatsapp';
+
+            $(".error").hide();
+            if (msisdn) {
+                msisdn = arNumberToen(msisdn);
+                window.msisdn = msisdn;
+                $("#button-loading").show();
+                $("#button").addClass("disabled_btn").prop("disabled", true);
+
+                // get_service_details(msisdn).then(function(kw_result) {
+                window.gateway = "mondiamedia";
+                window.telco = "etisalat";
+                window.sc = "1741";
+                window.kw = "gz";
+
+                if (window.sc && window.kw) {
+                    create_lead().then(function (res) {
+                        if (window.telco == 'du') {
+                            window.location.replace("https://api.actelme.com/api/protection/ScriptCheck?appid=4488&opid=41&clickid=" + get_transaction_id() + "&country=AE&msisdn=" + window.msisdn + "&mode=1");
+                        }
+                        else {
+                            pin_request().then(function (pin_result) {
+                                if (pin_result.redirect_url)
+                                    window.location.replace(pin_result.redirect_url);
+                                else
+                                    window.location.replace(window.location.origin + offer_path + "/pin/" + window.telco + window.location.search);
+                            })
+                                .catch(function (pin_result) {
+                                    $("#button").removeClass("disabled_btn").prop("disabled", false);
+                                    $("#button-loading").hide();
+
+                                    //alert("PIN request failed, please try again");
+                                    $("#txt-pin-error").show();
+                                    console.warn(pin_result);
+                                });
+                        }
+                    })
+                        .catch(function () {
+                            $("#button").removeClass("disabled_btn").prop("disabled", false);
+                            $("#button-loading").hide();
+
+                            //alert("Request failed, please try again");
+                            $("#txt-request-error").show();
+                        });
+                } else {
+                    $("#button").removeClass("disabled_btn").prop("disabled", false);
+                    $("#button-loading").hide();
+                    $("#txt-no-service-error").show();
+                }
+                // })
+                // .catch(function() {
+                //     $("#button").removeClass("disabled_btn").prop("disabled", false);
+                //     $("#button-loading").hide();
+
+                //     //alert("Request failed, please try again");
+                //      $("#txt-request-error").show();
+                // });
+
+            } else {
+                $("#txt-msisdn-error").show();
+            }
+
+        }
+    </script>
+</head>
+
+
+<body>
+
+
+    <div class="header">
+        <div class="header-left"></div>
+
+        <div class="header-center">
+            <p class="ae_tnc" id="ae_tnc">
+                فترة مجانية مدتها 24 ساعة ثم 11 درهم في الأسبوع. السعر يشمل الضريبة المضافة
+            </p>
+        </div>
+
+        <div class="header-right">
+
+            <div class="langSelect">
+
+                <a href="#" class="lang_button text" onclick="lang_change('en')" id="lang_button_en">
+                    <div>EN</div>
+                </a>
+
+                <a href="#" class="lang_button text" onclick="lang_change('ar')" id="lang_button_ar"
+                    style="display:none;">
+                    <div>العربية</div>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="header-clear"></div>
+
+    </div>
+
+    <div class="content">
+
+        <div class="logo">
+
+            <div class="logo-content">
+
+                <!-- <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='101.872' height='101.872' xmlns:v='https://vecta.io/nano'%3E%3Cpath d='M58.796 14.532c-14.846.003-28.541 7.998-35.842 20.926s-7.077 28.784.586 41.499l-7.432 22.086 22.791-7.3c15.068 8.318 33.72 6.385 46.762-4.846s17.722-29.389 11.733-45.525S76.01 14.529 58.799 14.528z' fill='%232d2d2d' fill-rule='evenodd' opacity='.53'/%3E%3Cg stroke='%23fff' stroke-width='4'%3E%3Cpath d='M26.882 26.881c13.284-13.284 34.823-13.284 48.107 0s13.284 34.823 0 48.107-34.823 13.284-48.107 0-13.284-34.823 0-48.107z' fill='%23fff'/%3E%3Cpath d='M70.998 61.392l-7.051-3.687c-.951-.387-1.645-.587-2.387.438s-2.843 3.314-3.478 3.992-1.257.744-2.291.177c-3.051-1.352-5.844-3.223-8.253-5.532-2.219-2.21-4.097-4.738-5.573-7.5-.577-1.075 0-1.623.541-2.126.491-.455 1.1-1.191 1.647-1.783a7.22 7.22 0 0 0 1.114-1.712 1.93 1.93 0 0 0-.019-1.843c-.243-.535-2.15-5.785-2.946-7.922s-1.685-1.818-2.3-1.843l-2.01-.162a3.86 3.86 0 0 0-2.851 1.209c-2.49 2.184-3.945 5.316-4.008 8.627-.2 5.169 3.384 10.307 3.883 11.025s6.831 11.93 17.353 16.538 10.584 3.205 12.513 3.1 6.313-2.312 7.283-4.73 1.045-4.524.8-4.971-.938-.738-1.968-1.3zm-19.3-50.521c-14.847.003-28.542 7.998-35.843 20.926s-7.077 28.784.587 41.5L9.01 95.382l22.791-7.3c15.068 8.318 33.72 6.385 46.762-4.846s17.722-29.389 11.733-45.525-21.383-26.843-38.595-26.844z' fill='%2367d862' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E" /> -->
+                <p>Download Content</p>
+
+            </div>
+
+        </div>
+
+        <div class="title">
+
+            <div class="green_box">
+
+                <p id="text-text-1">جديد! محتويات إضافية وألعاب</p>
+
+                <div class="box_tick">
+
+                    <p>5:21 PM</p>
+
+                    <div class="double_tick">
+
+                        <div class="first_tick"></div>
+                        <div class="second_tick"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="gray_box">
+
+                <p id="text-text-2">إحصل على وصول فوري الآن!</p>
+
+                <div class="box_tick">
+
+                    <p>5:21 PM</p>
+
+                    <div class="double_tick">
+
+                        <div class="first_tick"></div>
+                        <div class="second_tick"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="formWrap" id="formWrap">
+
+            <div id="instruction" class="display_1">أدخل رقم هاتفك المحمول للمتابعة</div>
+
+            <div class="formElm formElm--prefix">
+
+                <span class="prefixCode">
+
+                    <div class="smartphone">
+
+                        <div></div>
+
+                    </div>
+
+                    <span>(+971)</span>
+
+                </span>
+
+                <button id="backspace">
+
+                    <div class="backspace_icon"></div>
+
+                </button>
+
+                <input type="tel" id="msisdn" class="msisdn" value="" maxlength="9"
+                    onfocus="var temp=this.value; this.value=''; this.value=temp" autofocus="true">
+                <div class="msisdnArrow">
+
+                    <i class="gg-arrow-right-r"></i>
+
+                </div>
+
+                <span id="txt-msisdn-error" class="error" style="display:none;"></span>
+                <span id="txt-request-error" class="error" style="display:none;"></span>
+                <span id="txt-pin-error" class="error" style="display:none;"></span>
+                <span id="txt-no-service-error" class="error" style="display:none;"></span>
+
+            </div>
+
+
+            <div id="pin_pad">
+                <div class="display">
+                    <div class="numbers">
+                        <div class="number">1</div>
+                        <div class="number">2</div>
+                        <div class="number">3</div>
+                        <div class="number">4</div>
+                        <div class="number">5</div>
+                        <div class="number">6</div>
+                        <div class="number">7</div>
+                        <div class="number">8</div>
+                        <div class="number">9</div>
+                        <div class="number">0</div>
+                        <div class="number" id="continue" style="opacity:0;">
+                            <div class="continue_tick"></div>
+                            CONTINUE
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="formElm formElm--btn">
+
+                <input type="button" id="button" class="button disabled_btn" value="إشترك!" onclick="sub_frm()"
+                    disabled>
+                <div class="submit_tick"></div>
+                <div class="btnArrow">
+
+                    <i class="gg-arrow-left-r"></i>
+                </div>
+
+
+                <div class="lds-dual-ring" id="button-loading"
+                    style="position:relative;top:-70px;height:0;display:none;"></div>
+            </div>
+
+            <!-- <a class="display_1" style="cursor:pointer;font-size:12px;" onclick="exit()"><?php echo lang('exit_text'); ?></a> -->
+
+            <div class="display_1 rate" style="color:black;" id="text-rate">فترة مجانية مدتها 24 ساعة ثم 11 درهم في
+                الأسبوع. السعر يشمل الضريبة المضافة</div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+
+        <div class="tnc_1" id="text-tnc-1">
+            <center>الشروط والاحكام: <br>• لمشتركي اتصالات فترة مجانية مدتها 24 ساعة ثم 11 درهم في الأسبوع تلقائيا.
+                <br>• لا إلتزام لمشتركي اتصالات، ويمكنك إلغاء اشتراكك في أي وقت بإرسال C MVIP الى 1111. <br>• التجربة
+                المجانية صالحة فقط للمشتركين اتصالات الجدد.<br> • لمشتركي اتصالات استمتع بالفترة المجانية لمدة 24
+                ساعة.<br> • من خلال إشتراكك في الخدمة، فإنك تقدم موافقة صريحة على إستلام الإخطارات والرسائل الترويجية
+                المتعلقة بالخدمة.
+                <center />
+
+        </div>
+
+        <div class="tnc_2">
+            <a href="Terms and Conditions/tnc.html" target="_blank" style="color:black;text-decoration:none;"
+                id="text-tnc-link-text"></a>
+        </div>
+
+
+    </div>
+</body>
+
+
+</html>

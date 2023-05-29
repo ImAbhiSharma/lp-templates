@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=2, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+    <link rel="stylesheet" href="style.css">
+
+
+    <script type="text/javascript">
+        vms.lp = {
+          selectors: {
+            menu: '.menu',
+            loader: '#loader',
+            msisdn_input: '#msisdn_input',
+            otp_input: '#otp-input',
+            error: '#error',
+            lang_btn: '#lang_btn',
+            lang_flag: '#lang_flag',
+            subscribe: '#subscribe'
+          },
+          init: function() {
+            vms.init()
+          },
+          onFlowChange(flow, step) {
+    
+          },
+          showError(message, reason) {
+            vms.selectors.error.innerHTML = message
+            vms.selectors.error.style.display = 'block'
+            this.vibrate(vms.selectors.subscribe)
+            this.vibrate(vms.selectors.error)
+            // alert(message)
+          },
+          vibrate(selector) {
+            selector.classList.add('vibration')
+            setTimeout(() => selector.classList.remove('vibration'), 3000)
+          },
+          onLocaleChange(lang, locale, altLocale) {
+            vms.selectors.lang_flag.setAttribute('src', `./imgs/${altLocale.country_code}.png`)
+          }
+        }
+        </script>
+    
+    
+    
+    <script type="text/javascript">
+
+
+        window.addEventListener('keydown', function (e) { if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) { if (e.target.nodeName == 'INPUT' && e.target.type == 'tel') { e.preventDefault(); return false; } } }, true);
+
+        if (!String.prototype.startsWith) {
+            String.prototype.startsWith = function (searchString, position) {
+                position = position || 0;
+                return this.indexOf(searchString, position) === position;
+            };
+        }
+
+    </script>
+
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>lp02</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <script src="../../cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        const layout = "";
+        $(function () {
+            layout == "ar_layout" ?
+                document.getElementsByTagName("html")[0].classList.add("ar_layout") :
+                "";
+
+            const aeTnc = document.getElementById("ae_tnc").innerHTML;
+            aeTnc == "" ?
+                (document.getElementById("ae_tnc").style.display = "none") :
+                (document.getElementById("ae_tnc").style.display = "block");
+
+            const select = document.getElementsByTagName("select");
+            pin = document.getElementsByClassName("pin");
+            let select_option = true;
+            const maxValue = $(".msisdn").attr("maxlength") - 1;
+            pinMaxVal = $(".pin").attr("maxlength") - 1;
+
+
+            withoutSelect();
+
+            function withoutSelect() {
+                if ($(".msisdn").length > 0) {
+                    $(".msisdnArrow").hide();
+                    $(".blueTick").hide();
+                    $(".btnArrow").hide();
+                } else if ($(".button").length == 1) {
+                    $(".btn-Arrow").hide();
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                    $(".msisdnArrow").hide();
+                    $(".blueTick").hide();
+                } else {
+                    $(".msisdnArrow, .btnArrow").hide();
+                    $(".blueTick").hide();
+                }
+            }
+
+            $(".msisdn").keydown(function () {
+                if ($(this).val().length >= maxValue) {
+                    $(".btnArrow").hide();
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                    $(".msisdnArrow").hide();
+                    $(".blueTick").show();
+                } else if ($(this).val().length <=
+                    maxValue) { //if remove the input value the tick would hide and the input will glow
+                    $(".msisdnArrow").hide();
+                    $(".btnArrow").hide();
+                    $(".blueTick").hide();
+                    var str = $('.button').attr('class');
+                    var n = str.includes("disabled_btn");
+                    console.log(str, n);
+                    if (n == false) {
+                        $(".button").addClass("disabled_btn").prop('disabled', true);
+                    }
+                }
+            });
+
+            $(".pin").keydown(function () {
+                if ($(this).val().length >= pinMaxVal) {
+                    $(".btnArrow").hide();
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                    $(".msisdnArrow").hide();
+                    $(".blueTick").show();
+                } else if ($(this).val().length <= pinMaxVal) {
+                    $(".msisdnArrow").hide();
+                    $(".btnArrow").hide();
+                    $(".blueTick").hide();
+                }
+            });
+
+            $(".formWrap").click(function () {
+            });
+
+            $("a.display_1").click(function () {
+                select.length > 0 ? withSelect() : withoutSelect();
+            });
+        });
+        var btnBg = document.querySelector('.button').style.backgroundColor;
+        if (btnBg == '') btnBg = document.querySelector('.button').style.background;
+        function submit_button() {
+            var btn = document.querySelector('.button');
+            if (btn.classList.contains('disabled')) {
+                btn.classList.remove('disabled')
+                btn.disabled = false;
+                btn.style.background = btnBg;
+            }
+            else {
+                btn.classList.add('disabled');
+                btn.disabled = true;
+                btn.style.background = '#9f9f9f';
+            }
+        }
+        $(document).click(function () {
+        });
+        function showFocus() {
+            $(".overlay").show();
+            $(".wrap").addClass("shake-horizontal");
+        }
+
+    </script>
+
+
+    <script>
+        function get_transaction_id() {
+            let url_string = window.location.href
+            let url = new URL(url_string);
+            return url.searchParams.get("transaction_id");
+        }
+
+        // Actel protection script
+        var script = document.createElement('script');
+        script.addEventListener('load', function () {
+            var event = new Event('DCBProtectRun');
+            document.dispatchEvent(event);
+        });
+        script.type = 'text/javascript';
+        script.src = '//api.actelme.com/api/protection/script?appid=4488&opid=41&clickid=' + get_transaction_id() + '&selector=%23button&country=AE&mode=1';
+        //
+
+        let url_string = window.location.href
+        let url = new URL(url_string);
+        let lang = url.searchParams.get("lang");
+        var global_lang = "ar"
+
+        $(document).ready(function () {
+            // Actel protection script
+            // document.head.appendChild(script);
+
+            if (lang) {
+                global_lang = lang;
+                lang_change(lang);
+            }
+            else lang_change(global_lang);
+        });
+
+        function lang_change(language) {
+            let url_string = window.location.href
+            let url = new URL(url_string);
+
+            url.searchParams.set("lang", language);
+            window.history.replaceState(null, null, url.search);
+
+            switch (language) {
+                case "ar":
+                    $("html").attr("class", "ar_layout");
+                    $("#lang_button_ar").hide();
+                    $("#lang_button_en").show();
+
+                    $("#title").html("التحميل الخاص بك جاهز!");
+                    $("#ae_tnc").html("اتصالات: فترة مجانية مدتها 24 ساعة ثم 14 درهم في الأسبوع. دو: 12.6 درهم في الاسبوع. السعر يشمل الضريبة المضافة");
+                    $("#instruction").html("أدخل رقم هاتفك المحمول لتحميل المحتوى الخاص بك:");
+                    $("#rate").html("رسوم الاشتراك: 10 ريال قطري/أسبوعيًا (تجديد تلقائي للإشتراك)");
+                    $("#display").html(' خروج');
+                    $("#tnc-text-1").html('<br><br><br><br><br><br><center>الشروط والاحكام: • لمشتركي اتصالات فترة مجانية مدتها 24 ساعة ثم 14 درهم في الأسبوع تلقائيا. • لا إلتزام لمشتركي اتصالات ، لمشتركي اتصالات يمكنك إلغاء اشتراكك في أي وقت بإرسال UNSUB ED إلى 1151. • التجربة المجانية صالحة فقط للمشتركين اتصالات الجدد. • لمشتركي اتصالات استمتع بالفترة المجانية لمدة 24 ساعة. • للمساعدة، الرجاء التواصل معنا cs@puretechglobal.com</center>');
+                    $("#tnc-text-2").html('<center><a href="downloadgreen/tnc" target="_blank" style="color:rgb(0 0 0 / 49%);text-decoration:none;">•	للمزيد من المعلومات اضغط على هذا <b><u>الرابط<u><b></b></u></u></b></a><u><u><b></b></u></u></center>');
+                    $("#button").val("إشترك الآن!");
+
+                    $("#txt-msisdn-error").html("Please enter a valid MSISDN");
+                    $("#txt-request-error").html("Request failed, please try again");
+                    $("#txt-pin-error").html("PIN request failed, please try again");
+                    $("#txt-no-service-error").html("Sorry! The service is not available for this MSISDN");
+
+                    break;
+                case "en":
+                default:
+                    $("html").attr("class", "");
+                    $("#lang_button_ar").show();
+                    $("#lang_button_en").hide();
+
+                    $("#title").html("Your download is ready!");
+                    $("#instruction").html("Enter your mobile number to download your content:");
+                    $("#ae_tnc").html("Etisalat: 24 Hours free, then 14 AED per week. DU: 12.6 AED per week. VAT included");
+                    $("#rate").html("Charges: QAR 10 /Week (Auto-Renewal)");
+                    $("#display").html("Exit");
+                    $("#tnc-text-1").html('<br><br><br><br><br><br>Terms & Condition: • For Etisalat users, a free trail of 24 hours • Renewal will be automatic after every week • No commitment, you can cancel any time after the free trial by sending UNSUB ED to 1151. • The free trial period is valid only for Etisalat new subscribers. • For support / full T&C, please email us at cs@puretechglobal.com.');
+                    $("#tnc-text-2").html('<center><a href="downloadgreen/tnc" target="_blank" style="color:rgb(0 0 0 / 49%);text-decoration:none;">Or click on this link <b><u>T&C</u></b></a></center>');
+                    $("#button").val("Subscribe now!");
+
+                    $("#txt-msisdn-error").html("Please enter a valid MSISDN");
+                    $("#txt-request-error").html("Request failed, please try again");
+                    $("#txt-pin-error").html("PIN request failed, please try again");
+                    $("#txt-no-service-error").html("Sorry! The service is not available for this MSISDN");
+                    break;
+            }
+        }
+    </script>
+
+    <!-- <script>
+        //fixed
+        window.onload = function exampleFunction() {
+            view();
+        }
+
+        function view() {
+            let api_url = 'https://prod.api.puretechglobal.net/lp/view';
+
+            let tracking_data = {
+                "tracking_id": get_tracking_id()
+            };
+
+            tracking_data = JSON.stringify(tracking_data);
+
+            let jqxhr = $.ajax({
+                type: "POST",
+                url: api_url,
+                data: tracking_data,
+                contentType: "application/json",
+            });
+
+            return new Promise((resolve, reject) => {
+                jqxhr.done(function (result) {
+                    if (result.status == "success") {
+                        if (result.data && result.data.tracking_id) {
+                            let url_string = window.location.href
+                            let url = new URL(url_string);
+
+                            url.searchParams.set("tracking_id", result.data.tracking_id);
+                            window.history.replaceState(null, null, url.search);
+                        }
+                    }
+                    resolve(result);
+                });
+
+                jqxhr.fail(function (result) {
+                    console.warn('View API Error');
+                    reject(result);
+                });
+            });
+        }
+
+        function get_tracking_id() {
+            let url_string = window.location.href
+            let url = new URL(url_string);
+            return url.searchParams.get("tracking_id");
+        }
+
+        function create_lead() {
+            var xhttp = new XMLHttpRequest();
+            var api_url = 'https://prod.api.puretechglobal.net/lead/atlas_testing';
+
+            var params = {
+                function_name: "trackingLP_lead",
+                tracking_id: get_tracking_id(),
+                country: window.country,
+                gateway: window.gateway,
+                telco: window.telco,
+                shortcode: window.sc,
+                keyword: window.kw,
+                msisdn: window.msisdn
+            };
+
+            return new Promise((resolve, reject) => {
+                xhttp.onreadystatechange = (e) => {
+                    if (xhttp.readyState !== 4) {
+                        return;
+                    }
+                    if (xhttp.status === 200) {
+                        console.log('SUCCESS', xhttp.responseText);
+                        resolve(JSON.parse(xhttp.responseText));
+                    } else {
+                        console.warn('request_error');
+                    }
+                };
+                xhttp.open("POST", api_url);
+                xhttp.send(JSON.stringify(params))
+            });
+        }
+
+        function get_msisdn() {
+            var msisdn = $("#msisdn").val();
+            msisdn = msisdn.replace("+", "");
+            var check = 0;
+            if (typeof input !== 'undefined') {
+                check = 1;
+            }
+            arNumberToen = function (str) {
+                if (typeof str === 'string') {
+                    for (var i = 0; i < 10; i++) {
+                        str = str.replace(arabicNumbers[i], i);
+                    }
+                }
+                return str;
+            };
+            var arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
+            msisdn = arNumberToen(msisdn);
+
+            var country_code = '971';
+            var length = 12;
+            if (msisdn.length > length || msisdn.length < (length - country_code.length)) {
+                if (check == 1) {
+                    input = '971';
+                }
+                $("#msisdn").val("");
+                $("#msisdn").focus();
+                return false;
+            } else {
+                if ((msisdn.substr(0, country_code.length) == country_code) && (msisdn.length >= (length - country_code.length) && msisdn.length < length)) {
+                    if (check == 1) {
+                        input = '971';
+                    }
+                    $("#msisdn").val("");
+                    $("#msisdn").focus();
+                    return false;
+                } else {
+
+                    var max_cc_length = country_code.length;
+                    for (var i = 0; i <= country_code.length; i++) {
+                        if (msisdn.length == length) {
+                            if (msisdn.substr(0, max_cc_length) == country_code.substr(i, length)) {
+                                msisdn = country_code.substr(0, i) + msisdn;
+                            } else {
+                                //alert('msisdn length and entered not same');
+                                if (check == 1) {
+                                    input = '971';
+                                }
+                                $("#msisdn").val("");
+                                $("#msisdn").focus();
+                                return false;
+                            }
+                        }
+                        length--;
+                        max_cc_length--;
+                    }
+
+                }
+            }
+            return msisdn
+        }
+
+
+        function pin_request(msisdn, gateway, telco, shortcode, keyword) {
+
+            if (gateway == "tpay") {
+                pinData = {
+                    tracking_id: get_tracking_id(),
+                    msisdn: msisdn,
+                    telco: telco,
+                    shortcode: shortcode,
+                    keyword: keyword,
+                    language: global_lang,
+                    transaction_id: get_transaction_id(),
+                };
+
+                jqxhr = $.ajax({
+                    type: "POST",
+                    url: "https://prod.gateway.puretechglobal.net/sms_api_hub_process/pin_request/tpay/uae",
+                    data: pinData
+                });
+            }
+            else {
+                pinData = {
+                    tracking_id: get_tracking_id()
+                };
+
+                jqxhr = $.ajax({
+                    type: "POST",
+                    url: "https://prod.gateway.puretechglobal.net/sms_api_hub_process/pin_request/actel/uae",
+                    data: pinData
+                });
+            }
+
+            return new Promise((resolve, reject) => {
+                jqxhr.done(function (result) {
+                    console.log(result);
+                    if (result.result == "SUCCESS") {
+                        resolve(result);
+                    }
+                    else {
+                        console.warn('PIN request failed.');
+                        reject(result);
+                    }
+                });
+                jqxhr.fail(function (result) {
+                    console.warn('PIN request failed.');
+                    reject(result);
+                });
+            });
+        }
+
+        function get_service_details(msisdn) {
+            let hlrData = {
+                "msisdn": msisdn,
+                "provider": "infobip",
+                "gateway_id": 261
+            };
+
+            hlrData = JSON.stringify(hlrData);
+
+            let jqxhr = $.ajax({
+                type: "POST",
+                url: "https://prod.api.puretechglobal.net/hlr/hlr_lookup",
+                data: hlrData,
+                contentType: "application/json",
+            });
+
+            return new Promise((resolve, reject) => {
+                jqxhr.done(function (result) {
+                    let kw = {
+                        "42402": {
+                            gateway: "tpay",
+                            telco: "etisalat",
+                            shortcode: "1151",
+                            keyword: "ed"
+                        },
+                        "42403": {
+                            gateway: "actel",
+                            telco: "du",
+                            shortcode: "1561",
+                            keyword: "sf"
+                        },
+                    };
+
+                    if (result.status == "success") {
+                        window.telco = result.telco;
+
+                        if (window.telco in kw) {
+                            window.gateway = kw[window.telco]["gateway"];
+                            window.sc = kw[window.telco]["shortcode"];
+                            window.kw = kw[window.telco]["keyword"];
+                            window.telco = kw[window.telco]["telco"];
+                        }
+                    }
+
+                    resolve(result);
+                });
+
+                jqxhr.fail(function (result) {
+                    console.warn('get telco error');
+                    reject(result);
+                });
+            });
+        }
+
+        //endfixed
+        function sub_frm() {
+            let url_string = window.location.href
+            let url = new URL(url_string);
+
+            let msisdn = get_msisdn();
+            let offer_path = '/219/downloadgreen';
+
+            $(".error").hide();
+
+            if (msisdn) {
+                window.country = 'uae';
+                window.msisdn = msisdn;
+
+                $("#button-loading").show();
+                $("#button").addClass("disabled_btn").prop("disabled", true);
+
+                // get_service_details(msisdn).then(function(kw_result) {
+                window.gateway = "tpay";
+                window.telco = "etisalat";
+                window.sc = "1151";
+                window.kw = "ed";
+
+                if (window.sc && window.kw) {
+                    create_lead().then(function (res) {
+                        if (window.telco == 'du') {
+                            window.location.replace("https://api.actelme.com/api/protection/ScriptCheck?appid=4488&opid=41&clickid=" + get_transaction_id() + "&country=AE&msisdn=" + window.msisdn + "&mode=1");
+                        }
+                        else {
+                            pin_request(msisdn, window.gateway, window.telco, window.sc, window.kw).then(function (pin_result) {
+                                window.location.replace(window.location.origin + offer_path + "/pin/" + window.telco + window.location.search + "&msisdn=" + msisdn);
+                            })
+                                .catch(function (pin_result) {
+                                    $("#button").removeClass("disabled_btn").prop("disabled", false);
+                                    $("#button-loading").hide();
+
+                                    console.warn(pin_result);
+                                    var data = JSON.parse(pin_result.pin_req_response);
+                                    $("#txt-pin-error").html(data.error);
+                                    $("#txt-pin-error").show();
+                                });
+                        }
+                    })
+                        .catch(function () {
+                            $("#button").removeClass("disabled_btn").prop("disabled", false);
+                            $("#button-loading").hide();
+                            $("#txt-request-error").show();
+                        });
+                }
+                else {
+                    $("#txt-no-service-error").show();
+                    $("#button").removeClass("disabled_btn").prop("disabled", false);
+                    $("#button-loading").hide();
+                }
+                // })
+                // .catch(function() {
+                //     $("#button").removeClass("disabled_btn").prop("disabled", false);
+                //     $("#button-loading").hide();
+
+                //     $("#txt-request-error").show();
+                // });
+
+            } else {
+                $("#txt-msisdn-error").show();
+            }
+        }
+    </script> -->
+</head>
+
+
+<body>
+
+    <div class="overlay"></div>
+
+
+    <div class="header">
+        <div class="header-left"></div>
+        <div class="header-center">
+            <p id="ae_tnc" class="ae_tnc" style="display: block;">
+                Etisalat: 24 Hours free, then 12 AED per week. VAT included </p>
+        </div>
+        <div class="header-right">
+            <div class="langSelect">
+                <a href="#" class="langBtn text" id="lang_button_ar" onclick="lang_change('ar')" style="display:none">
+                    <div>العربية</div>
+                </a>
+                <a href="#" class="langBtn text" id="lang_button_en" onclick="lang_change('en')">
+                    <div>English</div>
+                </a>
+            </div>
+        </div>
+        <div class="header-clear"></div>
+    </div>
+    <div class="content">
+        <div class="logo" onclick="showFocus()"></div>
+        <div class="title">
+            <h1 id='title'>Your download is ready!</h1>
+        </div>
+        <div class="formWrap wrap">
+            <div id="instruction" class="display_1">Enter your mobile number to download your content:</div>
+            <div class="formElm formElm--prefix">
+                <div class="prefixCode">
+                    <div class="smartphone">
+                        <div></div>
+                    </div>
+                    <span>(+971)</span>
+                </div>
+                <input type="tel" id="msisdn" class="msisdn" value="" maxlength="9"
+                    onfocus="var temp=this.value; this.value=''; this.value=temp" autofocus="true">
+                <div class="msisdnArrow" style="color: rgb(50, 140, 246); display: none;">
+                    <i class="gg-arrow-right-o"></i>
+                </div>
+            </div>
+
+            <span id="txt-msisdn-error" class="error" style="display:none;"></span>
+            <span id="txt-request-error" class="error" style="display:none;"></span>
+            <span id="txt-pin-error" class="error" style="display:none;"></span>
+            <span id="txt-no-service-error" class="error" style="display:none;"></span>
+
+            <div class="formElm">
+                <input type="button" id="button" class="button disabled_btn" value="Subscribe Now!" onclick="sub_frm()"
+                    disabled="">
+                <div class="btnArrow" style="color: rgb(50, 140, 246); display: none;">
+                    <i class="gg-arrow-right-o"></i>
+                </div>
+                <div class="lds-dual-ring" id="button-loading"
+                    style="position:relative;top:-70px;height:0;display:none;"></div>
+            </div>
+            <a class="display_1" id='display' style="cursor:pointer;font-size:12px;" onclick="exit()">
+                <div style="font-size:10px;">Exit</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="backdrop"></div>
+
+
+    <div class="footer">
+        <div class="tnc_1" id='tnc-text-1'><br><br><br><br><br><br>
+            <center>Terms and Conditions:<br>• For Etisalat users Free for 24 hours then, you will be charged AED
+                12/week automatically. <br> • No commitment for Etisalat users, you can cancel any time by sending UNSUB
+                ED to 1151.<br> • Free trial applicable only for first time Etisalat subscribers only. <br> • For
+                Etisalat users enjoy your Free trial for 24 hours. <br>• For support, please contact:
+                cs@pueretechglobal.com.<center></center>
+            </center>
+        </div>
+        <div class="tnc_2" id='tnc-text-2'><a href="//" target="_blank"
+                style="color:rgb(0 0 0 / 49%);;text-decoration:none;"></a>
+            <center><a href="//" target="_blank"
+                    style="color:rgb(0 0 0 / 49%);;text-decoration:none;">• For full T&amp;C, please click on this link
+                    <u><b>T&amp;C<b><u></u></b></b></u></a><b><b><u>
+                            <center><a href="//" target="_blank"
+                                    style="color:rgb(0 0 0 / 49%);;text-decoration:none;"></a></center>
+                        </u></b></b></center>
+        </div>
+    </div>
+
+</body>
+
+</html>

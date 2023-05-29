@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+
+    <script type="text/javascript">
+        vms.lp = {
+          selectors: {
+            menu: '.menu',
+            loader: '#loader',
+            msisdn_input: '#msisdn_input',
+            otp_input: '#otp-input',
+            error: '#error',
+            lang_btn: '#lang_btn',
+            lang_flag: '#lang_flag',
+            subscribe: '#subscribe'
+          },
+          init: function() {
+            vms.init()
+          },
+          onFlowChange(flow, step) {
+    
+          },
+          showError(message, reason) {
+            vms.selectors.error.innerHTML = message
+            vms.selectors.error.style.display = 'block'
+            this.vibrate(vms.selectors.subscribe)
+            this.vibrate(vms.selectors.error)
+            // alert(message)
+          },
+          vibrate(selector) {
+            selector.classList.add('vibration')
+            setTimeout(() => selector.classList.remove('vibration'), 3000)
+          },
+          onLocaleChange(lang, locale, altLocale) {
+            vms.selectors.lang_flag.setAttribute('src', `./imgs/${altLocale.country_code}.png`)
+          }
+        }
+        </script>
+
+    <script type="text/javascript">
+        window.lppConstants = { "partnerId": "1", "campaignId": "40726", "country": "UAE", "pageId": "5271", "pageName": "Verticals_SignUpToContinue", "ip": "122.161.85.160", "platform": "any", "visitId": "4345437259", "IsValidMsisdn": "False", "ServiceName": "ESRTV", "UAddr": "5611898" };
+        if (typeof dataLayer == 'undefined') dataLayer = [];
+        if (typeof lppConstants != 'undefined') dataLayer.push(lppConstants);
+        if (typeof curState != 'undefined') { dataLayer.push({ 'visit-id': curState.valueOf('VisitId') }); dataLayer.push({ 'event': curState.valueOf('StateName') }); }
+    </script>
+
+    
+    <script>
+        (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '../www.googletagmanager.com/gtm5445.html?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-NZPHXS6');
+    </script>
+
+
+    
+    <!-- Common Functions-- Start-->
+    <script type="text/javascript">
+
+        //NON jQuery functions
+
+        function hideElement(elmId) {
+            var elm = document.getElementById(elmId);
+            if (elm !== null) {
+                elm.style.display = 'none';
+            }
+        }
+        function showElement(elmId) {
+            var elm = document.getElementById(elmId);
+            if (elm !== null) {
+                elm.style.display = 'block';
+            }
+        }
+        function hasClass(el, name) {
+            if (el !== null) {
+                return new RegExp('(\\s|^)' + name + '(\\s|$)').test(el.className);
+            }
+            else {
+                return false;
+            }
+        }
+        function addCssClass(element, css) {
+            if (element !== null && typeof element !== 'undefined') {
+                //element.classList.add(css);
+                if (!hasClass(element, css)) { element.className += (element.className ? ' ' : '') + css; }
+            }
+        }
+        function removeCssClass(element, css) {
+            if (element !== null && typeof element !== 'undefined') {
+                //element.classList.remove(css);
+                if (hasClass(element, css)) {
+                    element.className = element.className.replace(new RegExp('(\\s|^)' + css + '(\\s|$)'), ' ').replace(/^\s+|\s+$/g, '');
+                }
+            }
+        }
+        function sendLog(level, text) {
+            try {
+                var path = document.getElementById('lpp-mediator').src;
+                var logUrl = getUrlBase(path) + "/api/log";
+                ajaxPostJson(logUrl,
+                    {
+                        Message: text,
+                        MessageType: level
+                    },
+                    null,
+                    function (message) {
+                        console.log("FAILED: " + message);
+                    });
+            }
+            catch (ex) {
+                console.log(ex.message);
+            }
+        }
+
+        function ajaxGet(url, params, callback) {
+            var xmlhttp = new XMLHttpRequest();
+            if (params != null && typeof params !== 'undefined' && params.length > 0) {
+                url = url + "?"
+                for (i = 0; i < params.length; i++) {
+                    url = url + params[i].key + "=" + params[i].value;
+                    if (i != params.length - 1) {
+                        url = url + "&";
+                    }
+                }
+            }
+            xmlhttp.open("error2550.html", url, true);
+            if (callback != null && typeof callback !== 'undefined' && typeof callback === 'function')
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        callback(xmlhttp.responseText);
+                    }
+                };
+            xmlhttp.send();
+        }
+
+
+        function ajaxPost(url, data, callback) {
+            var xmlhttp = new XMLHttpRequest();
+
+            if (callback != null && typeof callback !== 'undefined' && typeof callback === 'function')
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        callback(this.responseText);
+                    }
+                };
+
+            xmlhttp.open("error5e6a.html", url, true);
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xmlhttp.send(data);
+        }
+
+
+        /* https://plainjs.com/javascript/ajax/serialize-form-data-into-an-array-46/ */
+
+        function serializeArray(form) {
+            var field, l, s = [];
+            if (typeof form == 'object' && form.nodeName == "FORM") {
+                var len = form.elements.length;
+                for (i = 0; i < len; i++) {
+                    field = form.elements[i];
+                    if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button') {
+                        if (field.type == 'select-multiple') {
+                            l = form.elements[i].options.length;
+                            for (j = 0; j < l; j++) {
+                                if (field.options[j].selected)
+                                    s[s.length] = { name: field.name, value: field.options[j].value };
+                            }
+                        } else if ((field.type != 'checkbox' && field.type != 'radio') || field.checked) {
+                            s[s.length] = { name: field.name, value: field.value };
+                        }
+                    }
+                }
+            }
+            return s;
+        }
+
+        function serializeForm(form) {
+            if (form != null) {
+                var arr = serializeArray(form);
+                if (arr != null && arr.length > 0) {
+                    var result = "";
+                    for (i = 0; i < arr.length; i++) {
+                        if (i != 0) {
+                            result += "&";
+                        }
+                        result += arr[i].name + "=" + arr[i].value;
+                    }
+                    return result;
+                }
+            }
+            return null;
+        }
+        function ajaxPostJson(url, data, successCallback, failureCallback) {
+            var xmlhttp = setupAjaxClient(successCallback, failureCallback);
+            xmlhttp.open("error5e6a.html", url, true);
+            xmlhttp.setRequestHeader("Content-Type", "application/json");
+            xmlhttp.send(JSON.stringify(data));
+        }
+
+        function setupAjaxClient(successCallback, failureCallback) {
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+                    executeCallback(successCallback);
+                }
+                else if (this.readyState == 4 && this.status >= 400) {
+                    executeCallback(failureCallback);
+                }
+            }
+            return xmlhttp;
+        }
+
+        var managedUpdate = false;
+
+        function setInputFilters() {
+            var inputIds = ["input-number", "input-pin"];
+            var eventIds = ["keydown", "keyup", "mousedown", "mouseup", "select"];
+            var inputs = [];
+
+            for (i = 0; i < inputIds.length; i++) {
+                var input = document.getElementById(inputIds[i]);
+                if (input != null) {
+                    inputs.push(input);
+                    if (input.getAttribute("type").toLowerCase() == "number") {
+                        managedUpdate = true;
+                        input.setAttribute("type", "tel");
+                    }
+                    console.log("Found element " + inputIds[i]);
+                }
+            }
+
+            for (i = 0; i < inputs.length; i++) {
+                for (e = 0; e < eventIds.length; e++) {
+                    inputs[i].addEventListener(eventIds[e], function (evt) {
+                        this.value = this.value.split(/ /)[0].replace(/[^\d|٠١٢٣٤٥٦٧٨٩]+/g, '');
+                    });
+                }
+            }
+
+            managedUpdate = false;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            //Avoid additional event handler atttaching
+            if (managedUpdate) {
+                return;
+            }
+
+            // check if the DOM is fully loaded
+            setInputFilters();
+            var observeDOM = (function () {
+                var MutationObserver = window.MutationObserver || window.WebKitMutationObserver,
+                    eventListenerSupported = window.addEventListener;
+
+                return function (obj, callback) {
+                    if (MutationObserver) {
+                        // define a new observer
+                        var obs = new MutationObserver(function (mutations, observer) {
+                            if (mutations[0].addedNodes.length || mutations[0].removedNodes.length)
+                                callback();
+                        });
+                        // have the observer observe foo for changes in children
+                        obs.observe(obj, { childList: true, subtree: true });
+                    }
+                    else if (eventListenerSupported) {
+                        obj.addEventListener('DOMNodeInserted', callback, false);
+                        obj.addEventListener('DOMNodeRemoved', callback, false);
+                    }
+                };
+            })();
+
+            // Observe a specific DOM element:
+            observeDOM(document.getElementById('container'), function () {
+                setInputFilters();
+            });
+        });
+
+
+    </script>
+
+    
+<script
+        type="text/javascript">(function () { var c = [{ event: "click", elements: ["subscribe", "confirm", "lang-switch", "confirm-no", "mraid-close", "expand", "close", "subscribe-no"] }]; function n() { if (typeof window.mraid != "undefined" && window.mraid != null) { for (e = 0; e < c.length; e++) { var p = c[e]; for (i = 0; i < p.elements.length; i++) { var o = document.getElementById(p.elements[i]); if (o != null) { o.removeEventListener(p.event, j); o.addEventListener(p.event, j) } } } } } var j = function (p) { var q = this.id; var r = document.getElementById("lpp-mediator").src; var o = h(r) + "/api/event"; b(o, { Event: p.type, ElementId: q, CampaignId: g("cid", r), PageId: g("pageId", r), UserAgent: navigator.userAgent, VisitId: curState.VisitId, RequestId: g("requestId", r) }, null, function (s) { l("ERROR", "Event Tracking failed") }) }; function l(o, r) { var q = document.getElementById("lpp-mediator").src; var p = h(q) + "/api/log"; b(p, { Message: r, MessageType: o }, null, function (s) { console.log(s) }) } function m(p, o) { var q = new XMLHttpRequest(); q.onreadystatechange = function () { if (this.readyState == 4 && this.status == 200) { d(p) } else { if (this.readyState == 4 && this.status >= 400) { d(o) } } }; return q } function d(o) { if (o != null && typeof o !== "undefined" && typeof o === "function") { o(this.responseText) } } function b(r, o, q, p) { var s = m(q, p); s.open("error5e6a.html", r, true); s.setRequestHeader("Content-Type", "application/json"); s.send(JSON.stringify(o)) } function a(r, p, q, o) { if (p != null && typeof p !== "undefined" && p.length > 0) { r = r + "?"; for (i = 0; i < p.length; i++) { r = r + p[i].key + "=" + p[i].value; if (i != p.length - 1) { r = r + "&" } } } var s = m(q, o); s.open("error2550.html", r, true); s.send() } function h(p) { var o = f(p); var r = g("ssl", p); var q = "https"; if (r == "false") { q = "http" } return q + "://" + o } function f(q) { var o; var p; if (q.indexOf("://") > -1) { o = q.split("index.html")[2]; p = q.split("index.html")[3] } else { o = q.split("index.html")[0]; p = q.split("index.html")[1] } o = o.split("?")[0]; if (p != null && p != "undefined" && p == "lpp") { o = o + "/" + p } return o } function g(o, s) { if (!s) { s = window.location.href } o = o.replace(/[\[\]]/g, "\\$&"); var p = new RegExp("[?&]" + o + "(=([^&#]*)|&|#|$)"), r = p.exec(s); if (!r) { return null } if (!r[2]) { return "" } var q = decodeURIComponent(r[2].replace(/\+/g, " ")); if (q == "$&") { return "" } return q } if (typeof window.mraid != "undefined" && window.mraid != null) { var k = (function () { var p = window.MutationObserver || window.WebKitMutationObserver, o = window.addEventListener; return function (r, q) { if (p) { var s = new p(function (t, u) { if (t[0].addedNodes.length || t[0].removedNodes.length) { q() } }); s.observe(r, { childList: true, subtree: true }) } else { if (o) { r.addEventListener("DOMNodeInserted", q, false); r.addEventListener("DOMNodeRemoved", q, false) } } } })(); k(document.getElementById("container"), function () { if (typeof n == "function") { n() } }) } if (typeof n == "function") { n() } })();</script>
+    <script type="text/javascript">
+        function defer(t) { void 0 != typeof $ ? t() : setTimeout(function () { defer(t) }, 50) } function loadCLM() { var t = document.createElement("script"); t.setAttribute("type", "text/javascript"), t.setAttribute("src", "../wbg.infomediatechnologies.com/CTACapture/Scripts/CTAC_1.js"), document.body.appendChild(t) } function downloadJSAtOnload() { null !== curState.DesignPayload.URLs && void 0 !== curState.DesignPayload.URLs.updvmsisdn && ((new Image).src = curState.DesignPayload.URLs.updvmsisdn); var t = document.createElement("script"); t.setAttribute("type", "text/javascript"), t.setAttribute("src", "../ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"), null != document && null != document.body && (document.body.appendChild(t), defer(loadCLM)) } void 0 !== window.mraid ? downloadJSAtOnload() : window.addEventListener("load", downloadJSAtOnload, !1);
+    </script>
+
+    <script type="text/javascript">
+        function submit_stt_action(n) { n !== null && (document.getElementById("Action").value = n); submit_stt() } function change_lang(n, t) { document.getElementById("Action").value = "lang_" + t; console.log("L1"); var i = serializeForm(document.getElementById("smForm")); console.log("req:" + i + " -> " + curState.BaseUrl); try { ajaxPost(curState.BaseUrl + "/Creatives/Api2", i, function (n) { console.log("L2"); var t = JSON.parse(n), i = document.getElementById("container"); if (i.innerHTML = t.html, curState = t.state, UpdateCss(), InitializeCloseButton(), t == null || t.state == null) { console.log("error/bad response from /Creatives/Api"); return } postprocess_curState() }) } catch (r) { console.log("change_lang: " + r.message) } } function ValidateOperatorSelectionAndSubmit() { var n = !1, t = !1, i; document.getElementById("operator1") != null && (n = document.getElementById("operator1").checked); document.getElementById("operator2") != null && (t = document.getElementById("operator2").checked); localStorage.oc1_sel = n; localStorage.oc2_sel = t; i = n || t; i ? submit_stt() : document.getElementById("operator-not-selected-error").style.display = "block" } function ValidateOperatorSelection() { var n = !1, t = !1, i; document.getElementById("operator1") != null && (n = document.getElementById("operator1").checked); document.getElementById("operator2") != null && (t = document.getElementById("operator2").checked); localStorage.oc1_sel = n; localStorage.oc2_sel = t; i = n || t; i || (document.getElementById("operator-not-selected-error").style.display = "block") } function SetOverLay() { var n = document.getElementById("subscribe"), t = document.getElementById("pre-confirm"), i = document.getElementById("confirm"), r = document.getElementById("blocker"), u = document.getElementById("submit-pin"); r != null && (n != null || t != null || i != null || u != null) && addCssClass(document.getElementById("container"), "blocker") } function RemoveOverLays() { removeCssClass(document.getElementById("container"), "blocker") } function submit_stt_polling() { curState.StateNameEx != null && curState.StateNameEx.includes("RedirectionPolling") ? submit_stt() : console.log("submit_stt_polling - not RedirectionPolling") } function submit_stt() { SetOverLay(); var n = serializeForm(document.getElementById("smForm")); n = n + "&Cycle=" + curState.Cycle; console.log("req:" + n + " -> " + curState.BaseUrl); typeof BeforeStateChange == "function" && BeforeStateChange(); try { ajaxPost(curState.BaseUrl + "/Creatives/Api", n, function (n) { var t, r, i, u; if (console.log("D2"), t = JSON.parse(n), r = !1, curState.StateName == "DoubleConfirmation" && curState.StateName == t.state.StateName && (i = document.getElementById("subscribe"), i == null && (r = !0)), document.getElementById("subscr-flow-states").innerHTML = t.html, r && (i = document.getElementById("subscribe"), u = document.getElementById("confirm"), i.parentNode.removeChild(i), u.style.display = "block"), curState.StateName == t.state.StateName && t.state.Cycle++, curState = t.state, UpdateCss(), t == null || t.state == null) { console.log("error/bad response from /Creatives/Api:" + n); return } postprocess_curState() }) } catch (t) { console.log("error:did not receive proper response from /Creatives/Api. posted data:" + n) } } function postprocess_curState() { var n, t, i, r, u; SetOverLay(); console.log("pp_css:" + curState.StateName); console.log("curState1"); n = document.getElementById("confirm"); n !== null && (n.addEventListener("click", function () { setTimeout(addCssClass(document.getElementById("container"), "blocker"), 200) }, !1), n.addEventListener("touchstart", function () { setTimeout(addCssClass(document.getElementById("container"), "blocker"), 200) }, !1)); curState.ErrorPayload !== null && curState.ErrorPayload.Exception !== null && console.log(curState.ErrorPayload.Exception); console.log("curState2"); console.log("curState" + curState.StateName + " : Error:" + curState.ErrorPayload == null); curState.ErrorPayload !== null && console.log(curState.ErrorPayload.Exception); switch (curState.StateName) { case "RtbDoubleConfirmation": case "DoubleConfirmation": addCssClass(document.getElementById("container"), "show-double-confirmation"); break; case "SubscriptionPolling": if (typeof curState.url != "undefined" && curState.url !== null) { console.log("RedirectionPolling1 " + curState.Cycle); hideElement(document.getElementById("subscriptionpolling-message")); curState.ErrorPayload == null && setTimeout(submit_stt_polling, 500 + curState.Cycle * 500); break } else if (curState.StateNameEx != null && curState.StateNameEx.includes("RedirectionPolling")) { console.log("RedirectionPolling2 " + curState.Cycle); hideElement(document.getElementById("subscriptionpolling-message")); curState.ErrorPayload == null && curState.Cycle < 5 && setTimeout(submit_stt_polling, 500 + curState.Cycle * 500); break } else addCssClass(document.getElementById("container"), "blocker"); case "ImmediateSubscribe": curState.ErrorPayload == null && setTimeout(submit_stt, 1e3 + curState.Cycle * 1e3); break; case "AlreadySubscribed": curState.ErrorPayload == null && setTimeout(submit_stt, 1e3); break; case "Congrats": curState.ErrorPayload == null && ("40" === lppConstants.partnerId && (gtag("event", "conversion", { send_to: "AW-10880007687/aK-2CK61pdoDEIf8_sMo" }), console.log("Event AW-10880007687 fired  ")), setTimeout(submit_stt, 8e3), onCongrats()); break; case "DirectSubscribe": curState.MSISDN != null && (dataLayer.push({ event: "msisdnDetected", IsValidMsisdn: "True" }), console.log("Google Custom Event: event:msisdnDetected , IsValidMsisdn:True - Msisdn:" + curState.MSISDN)); break; case "NumberEntry": console.log("Number Entry"); curState.ErrorPayload != null ? showElement(document.getElementById("invalid-number-error")) : hideElement(document.getElementById("invalid-number-error")); typeof localStorage.oc1_sel !== undefined && document.getElementById("operator1") != null && (document.getElementById("operator1").checked = localStorage.oc1_sel === "true"); typeof localStorage.oc2_sel !== undefined && document.getElementById("operator2") != null && (document.getElementById("operator2").checked = localStorage.oc2_sel === "true"); break; case "PinEntry": curState.ErrorPayload != null ? showElement(document.getElementById("invalid-pin-error")) : hideElement(document.getElementById("invalid-pin-error")); typeof curState.pin !== undefined && curState.showPinResent ? showElement(document.getElementById("resend-pin-success")) : hideElement(document.getElementById("resend-pin-success")); typeof localStorage.oc1_sel !== undefined && document.getElementById("operator1") != null && (document.getElementById("operator1").checked = localStorage.oc1_sel === "true"); typeof localStorage.oc2_sel !== undefined && document.getElementById("operator2") != null && (document.getElementById("operator2").checked = localStorage.oc2_sel === "true") }typeof curState.url != "undefined" && curState.url !== null && (curState.xhr ? curState.ErrorPayload == null ? (SetOverLay(), xhr_redirect()) : curState.ErrorPayload.Code == 8 ? setTimeout(submit_stt, 2e3) : console.log(curState.ErrorPayload) : typeof mraid != "undefined" && window.mraid !== null ? window.mraid.open(curState.url) : window.location = curState.url); typeof dataLayer != "undefined" && (dataLayer.push({ event: curState.StateName }), dataLayer.push({ StateName: curState.StateName })); StopAnimations(); typeof onStateChanged != "undefined" && onStateChanged(); typeof LogCTA == "function" && typeof infParams != "undefined" && (t = document.getElementById("subscribe"), t != null && t.addEventListener("click", function () { curState.MSISDN != null && OnSubclickCTACcall() }), i = document.getElementById("submit-number"), i != null && i.addEventListener("click", function () { var t = document.getElementById("input-number"), n; t != null && t.value.length >= 10 ? (console.log("Entered Msisdn Entry"), n = t.value, n.startsWith("0") && (n = "971" + n.substr(1)), curState.MSISDN = n, OnSubclickCTACcall()) : console.log("Entered Msisdn Entry - Else") }), r = document.getElementById("submit-pin"), r != null && r.addEventListener("click", function () { curState.MSISDN != null && OnConfClickCTACcall() }), u = document.getElementById("confirm"), u != null && u.addEventListener("click", function () { curState.MSISDN != null && OnConfClickCTACcall() })); configureInputFields(!0); RemoveOverLays() } function SetEngIdOnSubclick(n) { console.log("Engagement ID OnSubclick is: " + n); EngIdOnsubclick = n; var t = new Date; console.log("On Sub Click CTAC Call End  :::"); console.log("Total Time  for On Subscribe CTAC Call " + (d2millsec - t.getTime())); sendLog("Info", "VisitId: " + curState.VisitId + ",OnSub EngagementID: " + EngIdOnsubclick + ",Total Time  for On Subscribe CTAC Call:" + (d2millsec - t.getTime())) } function SetEngIdOnConfClick(n) { var t, i, r; console.log("Engagement ID OnConfClick is: " + n); EngIdOnConfclick = n; t = document.createElement("script"); i = curState.BaseUrl + "/Creatives/Api/?VisitId=" + curState.VisitId + "&StateName=State0&action=HandleEngId&engIdOnsubclick=" + EngIdOnsubclick + "&EngIdOnconfclick=" + EngIdOnConfclick; console.log("script_url=" + i); t.src = i; document.body.appendChild(t); r = new Date; console.log("On Confirm Click CTAC Call End  :::"); console.log("Total Time  for On Confirm CTAC Call " + (d3millsec - r.getTime())); sendLog("Info", "VisitId: " + curState.VisitId + ",OnConfirm EngagementID: " + EngIdOnConfclick + ",Total Time  for On Confirm CTAC Call:" + (d3millsec - r.getTime())) } function OnSubclickCTACcall() { var i = !1, n, t; try { try { n = "VIDDIGOPAGELOAD"; console.log("OnSubclickCTACcall(): srvcDescr=" + n); curState.OC != null && curState.OC == 1001 ? LogCTA(infParamsEtisalat.productId, curState.MSISDN, infParamsEtisalat.mcc, infParamsEtisalat.mnc, n, infParamsEtisalat.aid, infParamsEtisalat.paid, SetEngIdOnSubclick) : curState.OC != null && curState.OC == 1002 ? LogCTA(infParamsDu.productId, curState.MSISDN, infParamsDu.mcc, infParamsDu.mnc, n, infParamsDu.aid, infParamsDu.paid, SetEngIdOnSubclick) : LogCTA(infParams.productId, curState.MSISDN, infParams.mcc, infParams.mnc, n, infParams.aid, infParams.paid, SetEngIdOnSubclick) } catch (r) { sendLog("Error", "VisitId: " + curState.VisitId + " ,On Subscribe CTAC Call Infomedia exception :" + r); setTimeout(OnSubclickCTACcall, 100); i = !0 } i || (SubclickCalled = !0, t = new Date, d2millsec = t.getTime(), sendLog("Info", "VisitId: " + curState.VisitId + " ,On SubClick CTAC Call start:" + t), console.log("On SubClick CTAC Call start :::" + d2millsec)) } catch (r) { sendLog("Error", "VisitId: " + curState.VisitId + " ,On SubClick CTAC Call exception :" + r) } } function OnConfClickCTACcall() { var t = !1, n, r; try { try { n = "VIDDIGOPAGELOAD"; curState.OC != null && curState.OC == 1001 ? LogFinalCTA(infParamsEtisalat.productId, curState.MSISDN, infParamsEtisalat.mcc, infParamsEtisalat.mnc, n, infParamsEtisalat.aid, infParamsEtisalat.paid, SetEngIdOnConfClick) : curState.OC != null && curState.OC == 1002 ? LogFinalCTA(infParamsDu.productId, curState.MSISDN, infParamsDu.mcc, infParamsDu.mnc, n, infParamsDu.aid, infParamsDu.paid, SetEngIdOnConfClick) : LogFinalCTA(infParams.productId, curState.MSISDN, infParams.mcc, infParams.mnc, n, infParams.aid, infParams.paid, SetEngIdOnConfClick) } catch (i) { t = !0; sendLog("Error", "VisitId: " + curState.VisitId + " ,On Confirm CTAC Call Infomedia exception :" + i); setTimeout(OnConfClickCTACcall, 100) } t || (r = new Date, d3millsec = r.getTime(), console.log("On ConfirmClick CTAC Call start :::" + d3millsec), sendLog("Info", "VisitId: " + curState.VisitId + ",On ConfirmClick CTAC Call start:" + d3millsec)) } catch (i) { sendLog("Error", "VisitId: " + curState.VisitId + " ,On ConfirmClick CTAC Call exception :" + i) } } function sendLog(n, t) { try { ajaxGet(curState.BaseUrl + "/Api/logApi", [{ key: "message", value: t }, { key: "messageType", value: n }]) } catch (i) { console.log(i.message) } } function infomediaLoadLog() { if (curState.MSISDN != null && typeof LogPL == "function" && typeof LogCTA == "function") { var n; n = "VIDDIGOPAGELOAD"; curState.OC != null && curState.OC == 1001 ? LogPL(infParamsEtisalat.productId, curState.MSISDN, infParamsEtisalat.mcc, infParamsEtisalat.mnc, n, infParamsEtisalat.aid, infParamsEtisalat.paid) : curState.OC != null && curState.OC == 1002 ? LogPL(infParamsDu.productId, curState.MSISDN, infParamsDu.mcc, infParamsDu.mnc, n, infParamsDu.aid, infParamsDu.paid) : LogPL(infParams.productId, curState.MSISDN, infParams.mcc, infParams.mnc, n, infParams.aid, infParams.paid) } } function xhr_redirect() { SetOverLay(); var n = new Image; n.onload = function () { sendLog("WARN", "xhr_redirect: onload success") }; n.onerror = function () { submit_stt_action("getmsisdn"); infomediaLoadLog() }; n.src = curState.url } function AssignCloseButton() { if (typeof mraid == "undefined") { var n = document.getElementById("mraid-close"); n == null && (n = document.getElementById("close")); n != null && n.setAttribute("href", curState.ServiceUrl) } } function page_loaded() { console.log("calling infomedia loadlog"); infomediaLoadLog(); AssignCloseButton(); TrackIpV6(); postprocess_curState(); try { curState.DesignPayload.URLs !== null && curState.DesignPayload.URLs.updvmsisdn !== undefined && pix_updvmsisdn(curState.DesignPayload.URLs.updvmsisdn) } catch (n) { sendLog("WARN", "DesignPayload condition exception! VisitId: " + curState.VisitId) } UpdateCss() } function configureInputFields(n = false) { var t, i, r; if (n) { t = "has-lpp-error-handler"; switch (curState.StateName) { case "NumberEntry": i = document.getElementById("input-number"); i && !i.hasAttribute(t) && (i.setAttribute(t, !0), i.addEventListener("input", () => { hideElement(document.getElementById("invalid-number-error")) })); break; case "PinEntry": r = document.getElementById("input-pin"); r && !r.hasAttribute(t) && (r.setAttribute(t, !0), r.addEventListener("input", () => { hideElement(document.getElementById("invalid-pin-error")) })) } } } function startsWith(n, t) { return n.indexOf(t) == 0 } function UpdateCss() { var r = "layout-viewport", u = "layout-stack", i = document.getElementById("container"), t, n, f, e; i != null && (t = i.getAttribute("class"), n = "show-" + curState.StateName.toLowerCase() + " " + curState.DesignPayload.LangCode, t != null && (f = startsWith(t, r), f && (n = r + " " + n), e = startsWith(t, u), e && (n = u + " " + n), removeCssClass(i, t)), addCssClass(i, n)); typeof AfterPageLoaded == "function" && AfterPageLoaded() } function TrackIpV6() { try { if (console.log("Inside TrackIpV6"), curState.VisitId != null) { var n = "http://[2603:1020:200::682f:a6c1]/Api/TrackIpV6?src=md&visitId=" + curState.VisitId; ajaxGet(n) } } catch (t) { console.log("Error in TrackIpV6" + t.message) } } function onCongrats() { (window.lppConstants.campaignId === "40536" || window.lppConstants.campaignId === "40539" || window.lppConstants.campaignId === "40547" || window.lppConstants.campaignId === "40655") && (gtag("event", "conversion", { send_to: "AW-785557291/sFrhCK6z6_ABEKvOyvYC" }), sendLog("INFO", "Fired Pixel for vid=" + curState.VisitId), delay = 2e3) } function InitializeCloseButton() { if (typeof mraid == "undefined") { var n = document.getElementById("mraid-close"); n == null && (n = document.getElementById("close")); n != null && n.setAttribute("href", curState.ServiceUrl) } } function Close() { window.close() } function hideElement(n) { n != null && (n.style.display = "none") } function showElement(n) { n != null && (n.style.display = "block") } function hasClass(n, t) { return new RegExp("(\\s|^)" + t + "(\\s|$)").test(n.className) } function addCssClass(n, t) { n != null && typeof n != "undefined" && (hasClass(n, t) || (n.className += (n.className ? " " : "") + t)) } function removeCssClass(n, t) { n != null && typeof n != "undefined" && hasClass(n, t) && (n.className = n.className.replace(new RegExp("(\\s|^)" + t + "(\\s|$)"), " ").replace(/^\s+|\s+$/g, "")) } function sendLog(n, t) { try { ajaxGet(curState.BaseUrl + "/Api/logApi", [{ key: "message", value: t }, { key: "messageType", value: n }]) } catch (i) { console.log(i.message) } } function ajaxGet(n, t, r) { var u = new XMLHttpRequest; if (r != null && typeof r != "undefined" && typeof r == "function" && (u.onreadystatechange = function () { this.readyState == 4 && this.status == 200 && r(this.responseText) }), t != null && typeof t != "undefined" && t.length > 0) for (n = n + "?", i = 0; i < t.length; i++)n = n + t[i].key + "=" + t[i].value, i != t.length - 1 && (n = n + "&"); u.open("error2550.html", n, !0); u.send() } function ajaxPost(n, t, i) { var r = new XMLHttpRequest; i != null && typeof i != "undefined" && typeof i == "function" && (r.onreadystatechange = function () { this.readyState == 4 && this.status == 200 && i(this.responseText) }); r.open("error5e6a.html", n, !0); r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); r.send(t) } function serializeArray(n) { var t, u, r = [], f; if (typeof n == "object" && n.nodeName == "FORM") for (f = n.elements.length, i = 0; i < f; i++)if (t = n.elements[i], t.name && !t.disabled && t.type != "file" && t.type != "reset" && t.type != "submit" && t.type != "button") if (t.type == "select-multiple") for (u = n.elements[i].options.length, j = 0; j < u; j++)t.options[j].selected && (r[r.length] = { name: t.name, value: t.options[j].value }); else (t.type != "checkbox" && t.type != "radio" || t.checked) && (r[r.length] = { name: t.name, value: t.value }); return r } function serializeForm(n) { var t, r; if (n != null && (t = serializeArray(n), t != null && t.length > 0)) { for (r = "", i = 0; i < t.length; i++)i != 0 && (r += "&"), r += t[i].name + "=" + t[i].value; return r } return null } function Close() { window.mraid != null ? mraid.close() : window.close() } function StopAnimations() { function t(n, t) { "use strict"; n.classList.add(t) } var n = document.getElementById("container"); setTimeout(function () { "use strict"; t(n, "stop-all-animations") }, 27e3) } var infParams = { productId: 91000351, mcc: 424, mnc: 02, aid: 169, paid: "9788bd2c-9f2a-416a-b1b6-74094087c309" }, infParamsEtisalat = { productId: 91000351, mcc: 424, mnc: 02, aid: 169, paid: "9788bd2c-9f2a-416a-b1b6-74094087c309" }, infParamsDu = { productId: 91000351, mcc: 424, mnc: 03, aid: 169, paid: "f91adb3b-b5f0-4cfa-946c-fb78e6f474fa" }, EngIdOnsubclick = null, EngIdOnConfclick = null, d1millsec = new Date, d2millsec = new Date, d3millsec = new Date; (function () { typeof mraid != "undefined" ? typeof mraid != "undefined" && (mraid.getState() === "loading" ? mraid.addEventListener("ready", page_loaded) : mraid.getState() === "default" && page_loaded()) : window.addEventListener("load", page_loaded, !1) })(), function () { function n() { var u = null, f = null, r, t, o; try { if (r = document.cookie.split(";"), r.length > 0) for (i = 0; i < r.length; i++)t = r[i].split("="), t.length == 2 && (t[0].trim() == "_ga" && (f = t[1]), t[0].trim().startsWith("_gat_") && (u = t[0].replace("_gat_", "").trim())) } catch (e) { console.log(e.message) } if (u == null || f == null || curState.VisitId == null) setTimeout(function () { n() }, 2e3); else try { o = document.createElement("img"); o.src = curState.BaseUrl + "/Api/UpdateVisitGAData/?VisitId=" + curState.VisitId + "&GAUserId=" + f + "&GASessionId=" + u } catch (e) { console.log(e.message) } } }()
+    </script>
+
+    <script type="text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function s(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, r = document, f = window, e = "script", o = r.createElement(e), i, u; for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;)s("track" + i.pop()); return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) { var s = u && u(config, r, f, e, o); return s !== !0 && t["_" + i](config, r, f, e, o), s }), t
+        }({
+            instrumentationKey: 'a74f7d34-4f88-474a-800a-a2bb0b871386'
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+    </script>
+
+    <title>lp04</title>
+
+</head>
+
+
+<body>
+   
+   
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZPHXS6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <input id="statesBag" type="hidden" value="SubscriptionStates/ae/_1001_1002/default_no-operator-sel_autofill" />
+    <input id="clmScript" type="hidden" value="_/Scripts/MobileDirect/Infomedia/clm-aj-htm-ae.html" />
+
+    <div id="container" class="show-numberentry en">
+
+        <!-- Close button; please make sure the close button in visible above the blocker div -->
+
+        <a href="javascript:Close();" id="close"></a>
+
+
+        <!-- An overlay over the design to prevent unnecessary user clicks during transition -->
+
+        <div id="blocker">
+
+            <div class="preloader"></div>
+
+        </div>
+
+
+        <!-- Holds creative and subscription container -->
+
+        <div id="creative">
+
+            <div class="price-point" id="price-point">FREE for 1 day then 3.26 AED/day VAT Incl.</div>
+
+            <!-- Design  -->
+
+            <div id="design">
+                <div class="header">
+                    <div class="logo"></div>
+                    <div class="content">
+                        <h2>demo lp</h2>
+                        <p>#1 eSports pack. Watch live gaming tournaments and more.</p>
+                    </div>
+                </div>
+
+                <div class="design-copy design-copy_A">
+                    <h2 class="heading">Sign Up to Continue!</h2>
+                    <p class="sub-head">Follow the steps below to sign up.</p>
+                    <div class="steps">
+                        <ul>
+                            <li class="steps-wifi">Enter your mobile number</li>
+                            <li class="steps-3g">Click the CONTINUE button below</li>
+                            <li>Enter the PIN received</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="design-copy design-copy_B">
+                    <h2 class="heading">Almost there!</h2>
+                    <p class="sub-head">Enter the PIN sent to<br><span id='myMsisdn'></span></p>
+                </div>
+
+            </div>
+
+
+            <!-- States -->
+
+            <div class="states__wrap">
+
+                <div class="states__sfc" id="subscr-flow-states">
+                    <form id="smForm" method="post" action="#">
+                        <input id="StateName" name="StateName" type="hidden" value="DirectSubscribe" />
+                        <input id="StateNameEx" name="StateNameEx" type="hidden"
+                            value="Html5.PartnerPinCg.DirectSubscribe" />
+                        <input id="lppUtId" name="lppUtId" type="hidden" value="flgataqxl5fhjdm3hq0yxz2j" />
+                        <input id="VisitId" name="VisitId" type="hidden" value="4345437259" />
+                        <input id="OC" name="OC" type="hidden" />
+                        <input id="SubmisionId" name="SubmisionId" type="hidden" />
+                        <input id="SubscriberId" name="SubscriberId" type="hidden" />
+                        <input id="lang" name="lang" type="hidden" value="en" />
+                        <input id="Action" name="Action" type="hidden" value="continue" />
+                        <input id="redirectUrl" name="redirectUrl" type="hidden" value="Model.DesignPayload.URLs["
+                            action"]" />
+                        <div id="directsubscribe">
+
+                            <a href="javascript:void(0);" onclick="javascript:submit_stt();" id="subscribe" class="btn">
+                                <span>
+                                    Subscribe Now<p>and watch your favorite videos</p>
+                                </span>
+                            </a>
+
+                        </div>
+
+                        <div id="numberentry">
+
+
+                            <p id="numberentry-message">
+                                <span>Try for free!</span> Enter your mobile number below:
+                            </p>
+
+                            <div>
+                                <div class="phone-input">
+                                    <div class="phone"></div>
+                                    <input type="tel" autocomplete="tel" placeholder="Mobile Number" id="input-number"
+                                        name="number" maxlength="13" class="text-input" value="" data-preventdefault="1"
+                                        has-lpp-error-handler="true">
+                                    <div id="checkmark" class="checkmark-container" data-checkmark-container="true"
+                                        onclick="javascript:submit_stt();"><svg class="checkmark__icon"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none">
+                                            </circle>
+                                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8">
+                                            </path>
+                                        </svg></div>
+                                </div>
+                                <button type="button" id="submit-number" class="btn" onclick="javascript:submit_stt();"
+                                    disabled="">Continue <span class="cta-sub-text">To subscribe with
+                                        OTP</span></button>
+
+                                <p id="invalid-number-error" style="display: none;">Please enter a valid number</p>
+
+                                <p id="already-subscribed-error">You are already subscribed to this service</p>
+
+                                <p id="operator-not-selected-error">You must select your mobile operator</p>
+                            </div>
+
+
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="otptext">
+                    <p>You will receive a 4-digit PIN</p>
+                </div>
+                <!-- <div onclick="javascript:backToNE();" class="pin-state-message">If <b id='myMsisdn1'></b> is not your mobile number, <span>Click here</span> to change your phone number.</div>     -->
+
+                <div class="states__additional">
+
+                    <a href="#" id="subscribe-no" class="additional__exit">Exit</a>
+
+
+                </div>
+
+                <div id="disclaimer" class="disclaimer">
+                    By clicking on the above Subscribe button, you agree to the following Terms and Conditions: You will
+                    automatically start the paid subscription after the free trial. You can cancel your subscription any
+                    time by sending STOP ESR to 1156 for Etisalat users, and 8823 for DU users. This SMS carries a
+                    charge of AED 0.18 only for Etisalat users. The 1-day free trial is valid only for first-time
+                    subscribers. The service cost includes 5% VAT. For support, email us on supportae@esrtv.com. Please
+                    ensure that your browser is not using any third party blocking technologies and that you have a
+                    healthy internet connection for quick access to the content.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Page footer -->
+
+        <div id="footer">
+
+            <div class="footer__links">
+
+                <a id="lang-switch" href="javascript:change_lang('en', 'ar');"><span>عربي</span></a>
+
+                <ul id="external-links">
+
+                    <li><a href="#" id="terms" target="_blank">Terms</a></li>
+                    <li><a href="#" id="policy" target="_blank">Privacy</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- <div id="customer-support-address">BRIGHT MOBILE B.V., <br> Amalialaan 126B, 3743 KJ Baarn, The Netherlands</div> -->
+
+        </div>
+
+    </div>
+
+    <!-- Attach custom javascript if available -->
+
+    <script type="text/javascript">function AfterPageLoaded() {
+            var designbox = document.getElementById('design');
+            var inputNE = document.getElementById('input-number');
+            var inputPE = document.getElementById('input-pin');
+
+            if (inputNE !== null) {
+                inputNE.addEventListener('input', checkLengthNE, false);
+                document.getElementById('submit-number').disabled = true;
+            }
+            if (inputPE !== null) {
+                inputPE.addEventListener('input', checkLengthPE, false);
+            }
+
+            if (curState && curState.StateName === 'DirectSubscribe') {
+                if (document.getElementById('container').classList.contains('en')) {
+                    document.getElementById('subscribe').innerHTML = document.getElementById('subscribe').innerHTML.replace('Subscribe Now<p>and watch your favorite videos</p>', 'Continue <span class="cta-sub-text">To subscribe with OTP</span>');
+                }
+                if (document.getElementById('container').classList.contains('ar')) {
+                    document.getElementById('subscribe').innerHTML = document.getElementById('subscribe').innerHTML.replace('إشترك الآن<p>وشاهد مقاطع الفيديو المفضلة لديك </p>', 'تابع <span class="cta-sub-text">للاشتراك بكلمة مرور لمرة واحدة</span>');
+                }
+            }
+
+
+            if (curState && curState.StateName === 'PinEntry') {
+                // document.getElementById('submit-pin').disabled = true;
+                document.getElementById('submit-pin').classList.add('submit-pin_disabled');
+                document.getElementById('myMsisdn').innerHTML = curState.MSISDN;
+                //document.getElementById('myMsisdn1').innerHTML = curState.MSISDN;
+
+                if (document.getElementById('container').classList.contains('en')) {
+                    document.getElementById('submit-pin').innerHTML = document.getElementById('submit-pin').innerHTML.replace('Confirm Subscription', 'Confirm');
+                }
+                if (document.getElementById('container').classList.contains('ar')) {
+                    document.getElementById('submit-pin').innerHTML = document.getElementById('submit-pin').innerHTML.replace('تأكيد الإشتراك', 'تأكيد');
+                }
+
+            }
+
+            function checkLengthNE() {
+                var inputNE = document.getElementById('input-number');
+                var number = inputNE.value;
+                number = number.replace('+', '').replace(' ', '');
+                if (number.startsWith('5')) {
+                    number = "0" + number.substr(0, number.length - 0);
+                }
+                if (number.startsWith('971')) {
+                    number = "0" + number.substr(3, number.length - 3);
+                }
+                if (number.startsWith('0')) {
+                    number = "0" + number.substr(1, number.length - 1);
+                }
+                if (number.length >= 10) {
+                    inputNE.value = number;
+                    //document.getElementById('input-num-fancy').value=number;
+                    setTimeout(function () {
+                        document.getElementById('submit-number').disabled = false;
+                        document.getElementById('checkmark').style.display = "block";
+                    }, 100);
+                } else {
+                    document.getElementById('submit-number').disabled = true;
+                    document.getElementById('checkmark').style.display = "none";
+                }
+            }
+
+            function checkLengthPE() {
+                var inputPE = document.getElementById('input-pin');
+                var inputPinValueLength = inputPE.value.length;
+                var inputPinmaxLength = inputPE.maxLength;
+                if (inputPinValueLength == inputPinmaxLength) {
+                    setTimeout(function () {
+                        // document.getElementById('submit-pin').disabled = false;
+                        document.getElementById('submit-pin').classList.remove('submit-pin_disabled');
+                        document.getElementById('checkmark1').style.display = "block";
+                    }, 100);
+                } else {
+                    // document.getElementById('submit-pin').disabled = true;
+                    document.getElementById('submit-pin').classList.add('submit-pin_disabled');
+                    document.getElementById('checkmark1').style.display = "none";
+                }
+            }
+
+            if (curState.StateName === 'NumberEntry') {
+
+                if (curState.MSISDN !== null && curState.MSISDN.length > 0) {
+                    document.getElementById('input-number').value = curState.MSISDN; // recognizes number
+                    // document.getElementById('input-num-fancy').value = curState.MSISDN; // recognizes number
+                    checkLengthNE();
+                    //prettyNumber();
+                }
+
+                /*document.getElementById('input-num-fancy').addEventListener('input', function(e){
+                    document.getElementById('input-number').value = document.getElementById('input-num-fancy').value.replace(/[^\d]+/g, '');
+                    checkLengthNE();
+                    prettyNumber();
+                });*/
+
+                if (document.getElementById('container').classList.contains('en')) {
+                    document.getElementById('submit-number').innerHTML = document.getElementById('submit-number').innerHTML.replace('Subscribe Now', 'Continue <span class="cta-sub-text">To subscribe with OTP</span>');
+                }
+                if (document.getElementById('container').classList.contains('ar')) {
+                    document.getElementById('submit-number').innerHTML = document.getElementById('submit-number').innerHTML.replace('إشترك الآن', 'تابع <span class="cta-sub-text">للاشتراك بكلمة مرور لمرة واحدة</span>');
+                }
+
+
+            }
+
+        }
+
+        function validateFormBeforeSubmit_design() {
+            if (document.getElementById('StateName').value === 'State0')
+                return true;
+            return validateFormBeforeSubmit(true);
+        }
+
+        function prettyNumber() {
+            var x = document.getElementById('input-num-fancy').value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            document.getElementById('input-num-fancy').value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        }
+
+        function backToNE() {
+            document.getElementById('StateName').value = 'NumberEntry'; // goes back
+            document.getElementById('StateNameEx').value = '_1001_1002.States.NumberEntry';
+            submit_stt();
+        }
+
+
+        function setClickEvent() {
+
+
+            if (curState.StateName === 'NumberEntry') {
+                var playerBtn = document.getElementById('play');
+                var playerLoader = document.getElementById('js-player__loader');
+                var playerOverlay = document.getElementById('player-overlay');
+                var states = document.getElementById('subscr-flow-states');
+                playerBtn.classList.add('hide');
+                playerLoader.classList.add('show');
+
+                setTimeout(function () {
+                    playerBtn.classList.remove('hide');
+                    playerLoader.classList.remove('show');
+                    //playerOverlay.style.display = "none";
+                    document.getElementsByTagName('body')[0].classList.add('ne');
+                }, 1500);
+
+                playerOverlay.classList.add('fade-in');
+                playerBtn.classList.add('hide');
+                playerLoader.classList.add('hide');
+                states.classList.add('show');
+
+
+            }
+            else {
+                document.getElementsByTagName('body')[0].classList.remove('ne');
+            }
+
+
+        }
+
+
+
+        // Favicon script
+        function setFavIcon(i) {
+            const d = document, l = d.createElement('link')
+            l.setAttribute('rel', 'shortcut icon')
+            l.setAttribute('href', i)
+            d.head.appendChild(l)
+        }
+
+        setFavIcon('Content/Creatives/ESRTV/Verticals_RegisterNow/assets/img/favicon.png')
+    </script>
+
+
+    <script type="text/javascript">
+        if (typeof lppConstants != 'undefined') {
+            dataLayer.push(lppConstants);
+        }
+    </script>
+
+<!--  -->
+
+
+    <script>
+        //A helper script to change the language before the page fully loads all its data (images)
+        var conte = document.getElementById('container');
+        if (conte)
+            conte.classList.add(curState.DesignPayload.LangCode)
+    </script>
+</body>
+
+</html>

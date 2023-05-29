@@ -1,0 +1,548 @@
+<html>
+        
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<title>TNC</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="../../../cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<style>
+    .disabled_btn{background: #C0C0C0 !important;}
+    </style>
+    <style> 
+    *, ::after, ::before {
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         text-rendering: optimizeLegibility;
+         -webkit-font-smoothing: antialiased;
+    }
+     html{
+         font-size: 14px;
+    }
+     body, html {
+         overflow: auto;
+    }
+     a {
+         cursor: pointer;
+         -webkit-transition: all 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+         -o-transition: all 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+         transition: all 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+    }
+     a:hover {
+         text-decoration: none;
+    }
+     body {
+         font-family: 'Roboto', sans-serif;
+         margin: 0;
+         padding: 0;
+         font-size: 12px;
+         color: #000;
+         background: #fff;
+         position: relative;
+    }
+     .mainContent.margin{
+         margin-top: 52px;
+    }
+    .langSelect {
+        text-align: right;
+    }
+    
+    .langSelect .flag {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        margin-left: 8px;
+    }
+    
+    .langSelect img {
+        width: 28px;
+        cursor: pointer;
+    }
+    .lang_button.text {
+        display: inline-block;
+        margin: 0px 8px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 0.9rem;
+        background: #0f5ebf;
+        padding: 5px 8px;
+        border-radius: 8px;
+    }
+     .nav li:first-child {
+         display: inline-block;
+    }
+    .header {
+        padding: 5px 0px;
+        width: 100%;
+        max-width: 1024px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .header_left {
+        float: left;
+        width: 150px;
+        height: 1px;
+    }
+    
+    .header_right {
+        width: 150px;
+        float: right;
+        min-height: 1px;
+    }
+    .header_center {
+        display: inline-block;
+        margin: 0 auto;
+        width: 50%;
+    }
+    /* header {
+         position: fixed;
+         z-index: 9;
+         width: 100%;
+         top: 0;
+         left: 0;
+    }
+     */
+     .headWrap {
+         padding: 0px 1rem;
+         height: 52px;
+         line-height: 52px;
+    }
+     .headWrap__left {
+         float: left;
+    }
+     .topLogo {
+         text-transform: uppercase;
+         font-weight: 600;
+         margin: 0;
+    }
+     .headWrap__left img {
+         width: 100%;
+         height: auto;
+    }
+     .headWrap__right {
+         float: right;
+         width: auto;
+    }
+     .nav li {
+         display: none;
+         vertical-align: middle;
+         padding-left: 1rem;
+         font-size: .9rem;
+         font-weight: 40;
+         color: #858383;
+    }
+     .nav {
+         display: inline-block;
+         list-style: none;
+         padding-left: 0px;
+         margin: 0px;
+    }
+     .formElm img{
+         z-index: 9;
+         pointer-events: none;
+         position: absolute;
+         left: 0;
+         top: 50%;
+         -webkit-transform: translateY(-50%);
+         -ms-transform: translateY(-50%);
+         transform: translateY(-50%);
+         width: 38px;
+         height: auto;
+         -webkit-animation: animatedbg 0.3s linear infinite alternate;
+         animation: animatedbg 0.3s linear infinite alternate;
+    }
+     @-webkit-keyframes animatedbg {
+         from {
+            left: -38px;
+        }
+         to {
+            left: -50px;
+        }
+    }
+     @keyframes animatedbg {
+         from {
+            left: -38px;
+        }
+         to {
+            left: -50px;
+        }
+    }
+    /* .formElm__btn.maxis {
+         background-color: #7ec237;
+    }
+     .formElm__btn.celcom {
+         background-color: #0f7efa;
+    }
+     .formElm__btn.digi {
+         background-color: #FFD202;
+    }
+     .formElm__btn.umobile {
+         background-color: #ff7b00;
+    }
+     */
+     .mainContent {
+        /* margin-top: 52px;
+         */
+    }
+     .formContent {
+         -webkit-box-shadow: 0 1px 4px 3px rgba(60,64,67,0.15), 0 1px 3px 1px rgba(60,64,67,.16);
+         box-shadow: 0 1px 4px 3px rgba(60,64,67,0.15), 0 1px 3px 1px rgba(60,64,67,.16);
+         max-width: 780px;
+         margin: 0 auto;
+         width: 100%;
+         padding: 1.2rem;
+    }
+     .formContent__head {
+         text-align: center;
+         margin-bottom: 1rem;
+    }
+     .formContent__head h1{
+         font-size: 2.4rem;
+         font-weight: 400;
+         margin: 1rem 0px;
+    }
+     .subtitle{
+         font-size: 18px;
+         font-weight: 500;
+    }
+     .gifWrap{
+         max-width: 320px;
+         margin: 0 auto;
+         width: 100%;
+         overflow: hidden;
+    }
+     .gifWrap img{
+         width: 100%;
+         height: auto;
+    }
+     .formContent__body{
+         text-align: center;
+    }
+     .formRow {
+         margin-bottom: 15px;
+    }
+     .formRow:last-child{
+         margin-bottom: 0px;
+    }
+     .formElm {
+         width: 100%;
+         max-width: 320px;
+         position: relative;
+         margin: 0 auto;
+    }
+     .formRow--btn{
+         margin-top: 2rem;
+         margin-bottom: 2rem;
+    }
+     .formElm__label {
+         font-weight: 500;
+         display: block;
+         text-transform: capitalize;
+         margin-bottom: 5px;
+    }
+     .formElm__select {
+         background-color: transparent;
+    }
+     .formElm__input {
+         -moz-appearance: none;
+         appearance: none;
+         outline: none;
+         -webkit-box-shadow: none;
+         box-shadow: none;
+         border: 0px;
+         padding: 15px 0px;
+         padding-left: 15px;
+         width: 100%;
+         border-radius: 3px;
+         font-size: 16px;
+         background: #e8eef0;
+         margin-bottom: 1rem;
+    }
+     .formElm__helper {
+         color: #9cafb6;
+         font-weight: 500;
+         font-size: 13px;
+         display: inline-block;
+         padding-top: 5px;
+    }
+     .formElm__input:focus {
+         background-color: #e8e8e8;
+    }
+     .formElm__btn{
+         margin-bottom: .8rem;
+         display: block;
+         border-radius: 6px;
+         background-color: #4285f4;
+         border: 0;
+         font-size: 18px;
+        font-weight: 500;
+         cursor: pointer;
+         width: 100%;
+         padding: 15px 1rem;
+         color: #fff;
+         text-transform: uppercase;
+         -webkit-box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.28);
+         box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.28);
+         text-decoration: none;
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         appearance: none;
+         outline: none;
+    }
+     .formElm__btn.back{
+         background-color: #e8eef0;
+         color: #000;
+    }
+     .formElm__helper--link{
+         color: #171114;
+    }
+     .formElm__helper--link a{
+         color: #017dc6;
+    }
+     .formElm__helper--lg{
+         display: block;
+         color: #171114;
+         font-size: 16px;
+         padding-top: 0px 
+    }
+     .highlight{
+         color: #4285f4;
+         font-weight: 500;
+         font-size: 2.2rem;
+    }
+     .cta{
+         font-size: 2rem;
+         margin-bottom: 8px;
+         margin-top: 0px;
+    }
+        .or{
+        font-size: 18px;
+        
+        }
+     ::-webkit-input-placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+         color: #9cafb6;
+         opacity: 1;
+        /* Firefox */
+    }
+     :-ms-input-placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+         color: #9cafb6;
+         opacity: 1;
+        /* Firefox */
+    }
+     ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+         color: #9cafb6;
+         opacity: 1;
+        /* Firefox */
+    }
+     :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+         color: #9cafb6;
+    }
+     ::-ms-input-placeholder {
+        /* Microsoft Edge */
+         color: #9cafb6;
+    }
+     .footerContent{
+         width: 100%;
+         max-width: 580px;
+         margin: 0 auto;
+         text-align: justify;
+         padding: 25px 1rem;
+    }
+     .footerContent p{
+         margin-bottom: 0px;
+         font-size: 12px;
+    }
+     .footerContent a{
+         display: block;
+         font-weight: 500;
+         text-align: center;
+         text-decoration: none;
+         color: #000;
+         padding-top: 8px;
+    }
+     .footerContent__terms{
+         font-weight: 500;
+         margin-top: 5px !important;
+    }
+     .content--aoc h2{
+         font-size: 1.6rem;
+    }
+     @media only screen and (max-width: 1024px) {
+         .formContent{
+             width: 95%;
+        }
+    }
+     @media only screen and (max-width: 480px) {
+         html {
+             font-size: 10px;
+        }
+         .subtitle{
+             font-size: 16px;
+        }
+         .formElm{
+             max-width: 280px;
+        }
+         .cta, .content--aoc h2{
+             font-size: 2rem;
+        }
+    }
+     @media only screen and (max-width: 768px) {
+         .subrate {
+             text-align: justify;
+        }
+    }
+    
+    @media all and (max-width: 420px){
+                .close {
+                    max-width: 330px;
+                }
+            }
+            
+     .smartphone {
+                background: #fff;
+                width: 18px;
+                margin: 0px auto;
+                height: 29px;
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                border-radius: 2px;
+                position: absolute;
+                margin-left: 1px;
+                top: -2px;
+            }
+            .smartphone:before {
+                /* content: "; */
+                display: block;
+                position: absolute;
+                top: 3px;
+                left: 50%;
+                margin-left: -3px;
+                height: 1px;
+                width: 7px;
+                border-radius: 4px;
+                background: black;
+            }
+            
+            .smartphone > div{
+                height: 1px;
+                width: 12px;
+                background: black;
+                position: absolute;
+                bottom: 5px;
+                left: 2px;
+            }
+            .smartphone:after {
+                /* content: "; */
+                display: block;
+                position: absolute;
+                bottom: 1px;
+                left: 50%;
+                margin-left: -1px;
+                width: 3px;
+                height: 3px;
+                background: black;
+                border-radius: 50%;
+            }
+            #frm_landing{
+                overflow: hidden;
+            }
+            .ar_layout .ae_tnc,
+            .ar_layout .display_1,
+            .ar_layout .display_2,
+            .ar_layout .button,
+            .ar_layout .title,
+            .ar_layout .display_aoc,
+            .ar_layout .display_1 .rate,
+            .ar_layout .display_2 .rate,
+            .ar_layout .tnc_1,
+            .ar_layout .tnc_1 a,
+            .ar_layout .tnc_2,
+            .ar_layout .footer,
+            .ar_layout a.display_1,
+            .ar_layout a.display_2 {
+                direction: rtl;
+            }
+    
+            .ar_layout .footer,
+            .ar_layout .tnc_2,
+            .ar_layout .tnc_1,
+            .ar_layout .tnc_1 a {
+                text-align: center;
+            }
+        </style>
+<script>
+    let url_string = window.location.href
+    let url = new URL(url_string);
+    let lang = url.searchParams.get("lang");
+    var global_lang = "en"
+
+    $( document ).ready(function() {
+        if(lang) {
+            global_lang = lang;
+            lang_change(lang);
+        }
+        else lang_change(global_lang);
+    });
+
+    function lang_change(language) {
+        let url_string = window.location.href
+        let url = new URL(url_string);
+
+        url.searchParams.set("lang", language);
+        window.history.replaceState(null, null, url.search);
+
+        global_lang = language;
+
+        switch(language) {
+            case "ar":
+                $("html").attr("class", "ar_layout");
+                $("#lang_button_ar").hide();
+                $("#lang_button_en").show();
+
+                $("#text-tnc-below-btn").html("<b>الأحكام والشروط</b><br> <br><br><b>1. الشروط </b><br><br>من خلال الوصول إلى هذا الموقع، فإنك توافق على الالتزام بشروط وأحكام الاستخدام الخاصة بهذا الموقع، وجميع القوانين واللوائح المعمول بها، وتوافق على أنك مسؤول عن الامتثال لأي قوانين محلية سارية. إذا كنت لا توافق على أي من هذه الشروط، فيُمنع من استخدام هذا الموقع أو الوصول إليه. المواد الواردة في هذا الموقع محمية بموجب قانون حقوق النشر والعلامات التجارية المعمول به. .<br><br><b>2. استخدام الترخيص</b><br><br>أ. يتم منح الإذن بتنزيل نسخة واحدة من المواد (المعلومات أو البرامج) مؤقتًا على موقع Mobizone على الويب للعرض الشخصي وغير التجاري فقط. هذا هو منح الترخيص، وليس نقل الملكية، وبموجب هذا الترخيص لا يجوز لك: <br>1. تعديل أو نسخ المواد<br>2. استخدام المواد لأي غرض تجاري، أو لأي عرض عام (تجاري أو غير تجاري) <br>3. محاولة فك شفرة أو عكس هندسة أي برنامج موجود على موقع Mobizone على الويب<br>4. إزالة أي حقوق نشر أو تدوينات ملكية أخرى من المواد<br>5. نقل المواد إلى شخص آخر أو (نسخ) المواد على أي خادم آخر<br>ب. ينتهي هذا الترخيص تلقائيًا إذا انتهكت أيًا من هذه القيود وقد يتم إيقافه بواسطة Mobizone في أي وقت. عند إنهاء عرضك لهذه المواد أو عند إنهاء هذا الترخيص، يجب عليك إتلاف أي مواد تم تنزيلها بحوزتك سواء بتنسيق إلكتروني أو مطبوع. .<br><br><b>3. إخلاء المسؤولية</b><br><br>يتم توفير المواد الموجودة على موقع Mobizone (كما هي). لا تقدم Mobizone أي ضمانات، صريحة أو ضمنية، وبهذا تنكر وتنفي جميع الضمانات الأخرى، بما في ذلك على سبيل المثال لا الحصر، الضمانات الضمنية أو شروط القابلية للتسويق، الملاءمة لغرض معين، أو عدم انتهاك الملكية الفكرية أو غيرها من انتهاكات الحقوق. علاوة على ذلك، لا تضمن Mobizone أو تقدم أي إقرارات فيما يتعلق بدقة أو نتائج محتملة أو موثوقية استخدام المواد على موقعها على الإنترنت أو فيما يتعلق بمثل هذه المواد أو بأي مواقع مرتبطة بهذا الموقع. .<br><br><b>4. القيود</b><br><br>لن تكون Mobizone أو مورديها مسؤولين بأي حال من الأحوال عن أي أضرار (بما في ذلك، على سبيل المثال لا الحصر، الأضرار الناجمة عن فقدان البيانات أو الربح، أو بسبب انقطاع الأعمال) الناشئة عن استخدام أو عدم القدرة على استخدام المواد الموجودة على موقع Mobizone على الإنترنت، حتى إذا تم إخطار Mobizone أو ممثل معتمد من Mobizoneشفهيًا أو كتابيًا باحتمال حدوث هذا الضرر. نظرًا لأن بعض الولايات القضائية لا تسمح بفرض قيود على الضمانات الضمنية، أو قيود المسؤولية عن الأضرار التبعية أو العرضية، فقد لا تنطبق هذه القيود عليك. .<br><br><b>5. التنقيحات</b><br><br>يمكن أن تتضمن المواد التي تظهر على موقع Mobizone أخطاء فنية أو مطبعية أو فوتوغرافية. لا تضمن Mobizone  أن تكون أي من المواد الموجودة على موقع الويب الخاص بها دقيقة أو كاملة أو حديثة. يجوز لـ Mobizone إجراء تغييرات على المواد الموجودة في موقعها على الويب في أي وقت دون إشعار مسبق. ومع ذلك، لا تقدم Mobizone أي التزام بتحديث المواد. .<br><br><b>2. استخدام الترخيص</b><br><br>لم تقم Mobizone بمراجعة جميع المواقع المرتبطة بموقعها على الإنترنت وليست مسؤولة عن محتويات أي موقع مرتبط. لا يتضمن تضمين أي رابط موافقة Mobizone للموقع. استخدام أي موقع ويب مرتبط على عاتق المستخدم. .<br><br><b>7. الموقع شروط الاستخدام التعديلات</b><br><br>يجوز لـ Mobizone مراجعة شروط الاستخدام لموقعها على الويب في أي وقت دون إشعار مسبق. باستخدام هذا الموقع، فإنك توافق على الالتزام بالإصدار الحالي وقتها لشروط وأحكام الاستخدام هذه. .<br><br><b>8. الاشتراك في الخدمات</b><br><br>سيبدأ الموفر خدمة الاشتراك بمجرد قيام المستخدم بإذن بذلك. أنت تمنح مقدم الخدمة إذنًا إذا قمت بكتابة نص في الكلمة الأساسية للخدمة على الرقم المختصر للمقدم. ستتلقى بعد ذلك رسالة تأكيد تؤكد حالة اشتراكك وتبدأ الخدمة. سيتم توفير معلومات الاتصال الخاصة بالجهات المقدمة لك، بحيث يمكنك إيقاف الخدمة في أي وقت. .<br><br><b>9. إلغاء الاشتراك في الخدمات</b><br><br>يمنحك الموفر إمكانية مقاطعة تدفق المعلومات الواردة عبر الرسائل القصيرة. بشكل عام ، يمكن مقاطعة المعلومات التي يتم تلقيها عبر الرسائل القصيرة عن طريق إرسال رسالة C MVIP. يمكنك إرسال هذه الرسالة إلى الرقم المختصر الذي استخدمته للدخول إلى الاشتراك. <br><br>© 2022 Mobizone VIP.");
+
+                break;
+            case "en":
+                $("html").attr("class", "");
+                $("#lang_button_ar").show();
+                $("#lang_button_en").hide();
+
+                $("#text-tnc-below-btn").html("<b>Terms and Conditions</b><br> <br><br><b>1. Terms</b><br><br>By accessing this web site, you are agreeing to be bound by these web site Terms and Conditions of Use, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this web site are protected by applicable copyright and trademark law.<br><br><b>2. Use License</b><br><br>a. Permission is granted to temporarily download one copy of the materials (information or software) on Mobizone’s web site for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:<br>i. Modifies or copy the materials<br>ii. Use the materials for any commercial purpose, or for any public display (commercial or non-commercial)<br>iii. Attempt to decompile or reverse engineer any software contained on Mobizone’s web site;<br>iv. Remove any copyright or other proprietary notations from the materials.<br>v. Transfer the materials to another person or (mirror) the materials on any other server.<br><br> This license shall automatically terminate if you violate any of these restrictions and may be terminated by Mobizone at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.<br><br><b>3. Disclaimer</b><br><br>The materials on Mobizone ’s web site are provided (as is). Mobizone makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, Mobizone does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet web site or otherwise relating to such materials or on any sites linked to this site.<br><br><b>4. Limitations</b><br><br>In no event shall Mobizone or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on Mobizone’s Internet site, even if Mobizone or a Mobizone authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.<br><br><b>5. Revisions and Errata</b><br><br>The materials appearing on Mobizone’s web site could include technical, typographical, or photographic errors. Mobizone does not warrant that any of the materials on its web site are accurate, complete, or current. Mobizone may make changes to the materials contained on its web site at any time without notice. Mobizone does not, however, make any commitment to update the materials.<br><br><b> 6. Links </b><br><br>Mobizone has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Mobizone of the site. Use of any such linked web site is at the user's own risk.<br><br><b>7. Site Terms of Use Modifications</b><br><br>Mobizone may revise these terms of use for its web site at any time without notice. By using this website, you are agreeing to be bound by the then current version of these Terms and Conditions of Use.<br><br><b>8. Governing Law</b><br><br>Any claim relating to Mobizone’s web site shall be governed by the laws of the State of http://ae.64.mobizone.vip without regard to its conflict of law provisions.<br><br><b>9. Subscribe of Services</b><br><br>The Provider will start the subscription service once the user has given permission to do so. You give the Provider permission if you text in the keyword of the service to the short number of the Provider. You will then receive a confirmation message confirming your subscription status and the service starts. Providers contact information will be provided to you, so that you may stop the service at any time.<br><br><b>10. Unsubscribe of Services</b><br><br>The Provider gives you the possibility of interrupting the flow of information received via SMS. Generally, information received via SMS can be interrupted by sending an SMS message starting with C MVIP. You can send this message to the short number you used for entry to the subscription.<br><br>General Terms and Conditions applicable to Use of a Web Site and Our Services.<br><br>© 2022 Mobizone VIP.");
+
+
+                break;
+        }
+    }
+</script>
+</head>
+<body>
+<div class="header">
+    <div class="header_right">
+        <div class="langSelect">
+            <a href="#" class="lang_button  text" onclick="lang_change('en')" id="lang_button_en" style="display:none;">
+                <div>EN</div>
+            </a>
+            <a href="#" class="lang_button  text" onclick="lang_change('ar')" id="lang_button_ar">
+                <div>العربية</div>
+            </a>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="footerContent">
+    
+
+
+
+<div class="display_1" id="text-tnc-below-btn"><b>Terms and Conditions</b><br> <br><br><b>1. Terms</b><br><br>By accessing this web site, you are agreeing to be bound by these web site Terms and Conditions of Use, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this web site are protected by applicable copyright and trademark law.<br><br><b>2. Use License</b><br><br>a. Permission is granted to temporarily download one copy of the materials (information or software) on Mobizone’s web site for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:<br>i. Modifies or copy the materials<br>ii. Use the materials for any commercial purpose, or for any public display (commercial or non-commercial)<br>iii. Attempt to decompile or reverse engineer any software contained on Mobizone’s web site;<br>iv. Remove any copyright or other proprietary notations from the materials.<br>v. Transfer the materials to another person or (mirror) the materials on any other server.<br><br> This license shall automatically terminate if you violate any of these restrictions and may be terminated by Mobizone at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.<br><br><b>3. Disclaimer</b><br><br>The materials on Mobizone ’s web site are provided (as is). Mobizone makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, Mobizone does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet web site or otherwise relating to such materials or on any sites linked to this site.<br><br><b>4. Limitations</b><br><br>In no event shall Mobizone or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on Mobizone’s Internet site, even if Mobizone or a Mobizone authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.<br><br><b>5. Revisions and Errata</b><br><br>The materials appearing on Mobizone’s web site could include technical, typographical, or photographic errors. Mobizone does not warrant that any of the materials on its web site are accurate, complete, or current. Mobizone may make changes to the materials contained on its web site at any time without notice. Mobizone does not, however, make any commitment to update the materials.<br><br><b> 6. Links </b><br><br>Mobizone has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Mobizone of the site. Use of any such linked web site is at the user's own risk.<br><br><b>7. Site Terms of Use Modifications</b><br><br>Mobizone may revise these terms of use for its web site at any time without notice. By using this website, you are agreeing to be bound by the then current version of these Terms and Conditions of Use.<br><br><b>8. Governing Law</b><br><br>Any claim relating to Mobizone’s web site shall be governed by the laws of the State of http://ae.64.mobizone.vip without regard to its conflict of law provisions.<br><br><b>9. Subscribe of Services</b><br><br>The Provider will start the subscription service once the user has given permission to do so. You give the Provider permission if you text in the keyword of the service to the short number of the Provider. You will then receive a confirmation message confirming your subscription status and the service starts. Providers contact information will be provided to you, so that you may stop the service at any time.<br><br><b>10. Unsubscribe of Services</b><br><br>The Provider gives you the possibility of interrupting the flow of information received via SMS. Generally, information received via SMS can be interrupted by sending an SMS message starting with C MVIP. You can send this message to the short number you used for entry to the subscription.<br><br>General Terms and Conditions applicable to Use of a Web Site and Our Services.<br><br>© 2022 Mobizone VIP.</div>
+
+</div></body>
+
+</html>

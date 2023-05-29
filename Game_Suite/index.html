@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>GameSuite</title>
+
+
+    <script type="text/javascript">
+        vms.lp = {
+          selectors: {
+            menu: '.menu',
+            loader: '#loader',
+            msisdn_input: '#msisdn_input',
+            otp_input: '#otp-input',
+            error: '#error',
+            lang_btn: '#lang_btn',
+            lang_flag: '#lang_flag',
+            subscribe: '#subscribe'
+          },
+          init: function() {
+            vms.init()
+          },
+          onFlowChange(flow, step) {
+    
+          },
+          showError(message, reason) {
+            vms.selectors.error.innerHTML = message
+            vms.selectors.error.style.display = 'block'
+            this.vibrate(vms.selectors.subscribe)
+            this.vibrate(vms.selectors.error)
+            // alert(message)
+          },
+          vibrate(selector) {
+            selector.classList.add('vibration')
+            setTimeout(() => selector.classList.remove('vibration'), 3000)
+          },
+          onLocaleChange(lang, locale, altLocale) {
+            vms.selectors.lang_flag.setAttribute('src', `./imgs/${altLocale.country_code}.png`)
+          }
+        }
+        </script>
+</head>
+
+
+<script>
+
+    let cc;
+    let msisdnInput;
+    let error;
+    let submitButton;
+    let overlay;
+
+    let msisdn;
+
+    let errorTimeout;
+
+    const init = () => {
+        
+        cc = document.getElementById('cc');
+        msisdnInput = document.getElementById('input');
+        error = document.getElementById('error');
+        submitButton = document.getElementById('button');
+        overlay = document.getElementById('overlay');
+    }
+
+    const showError = (message) => {
+        
+        clearTimeout(errorTimeout);
+
+        error.innerHTML = message;
+
+        errorTimeout = setTimeout(() => error.innerHTML = '', 3000);
+    }
+
+
+    const submitMsisdn = () => {
+        
+        msisdn = msisdnInput.value;
+
+        if (msisdn.indexOf('+966') !== 0) {
+            msisdn = '+966' + msisdn
+        }
+
+        if (msisdn.length !== 13) {
+            showError('Please enter correct number');
+            return;
+        }
+
+        overlay.classList.remove('display-none');
+
+        setTimeout(() => {
+
+            cc.classList.add('display-none');
+            msisdnInput.value = '';
+            msisdnInput.style.textAlign = 'center';
+            msisdnInput.setAttribute('placeholder', 'Enter PIN');
+            submitButton.innerHTML = 'Verify'
+
+            overlay.classList.add('display-none');
+
+        }, 2000)
+
+    }
+
+</script>
+
+
+
+<body onload="init()">
+
+
+    <label class="switch">
+
+        <input type="checkbox" id="togBtn">
+
+        <div class="slider round">
+
+            <span language='japanese' class="on">JPN</span>
+            <span language='english' class="off">ENG</span>
+
+        </div>
+
+    </label>
+
+
+    <div id="content">
+
+        <img id="logo" src="Assets/logo.png" />
+        <img id="banner" src="Assets/Download.png" />
+
+        <p id="text1"> Receive your activation code by SMS </p>
+
+        <p id="text2"> Enter your mobile phone number: </p>
+
+        <div id="msisdn-container">
+
+            <div id="cc">+966</div>
+            <input id="input" type="text" placeholder="Mobile Number">
+
+        </div>
+
+        <span id="error"></span>
+
+        <button id="button" onclick="submitMsisdn()">Subscribe</button>
+
+        <div id="game-icons">
+            <img class="game-icon" src="Assets/SN.png">
+            <img class="game-icon" src="Assets/Xbox.png">
+        </div>
+
+
+        <div id="terms">
+
+
+            <br>
+            <br>
+            
+            <ul>
+
+                <p id="term1">This service is available to Saudi Telecom Company customers for 1.5 riyals for prepaid
+                    customers, renewed daily , and for 51.75 riyals for post-paid customers, renewed monthly
+                    (including 15% value-added tax). To cancel the subscription, please send U 500 to 801848</p>
+                <p id="term2">The Tax amount was collected to prepaid customers upon charging</p>
+                <p id="term3">This service is available for Mobily customers for 1.725 SAR renewed daily (including VAT).</p>
+                <p id="term4">To cancel your subscription, please send U 500 to 600609</p>
+                <p id="term5">The Tax amount was collected to prepaid customers upon charging</p>
+                <p id="term6">For support, call us at <span style="font-weight: bold;">+966118343426</span>.</p>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+
+    <div id="overlay" class="display-none">
+
+        <div id="overlay_bg"></div>
+
+        <div id="overlay_loader">
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+        const sliderEl = document.querySelector('.slider');
+        const link = document.querySelectorAll('*');
+        
+        const text1El = document.querySelector('.text1');
+        const text2El = document.querySelector('.text2');
+        const term1El = document.querySelector('.term1');
+        const term2El = document.querySelector('.term2');
+        const term3El = document.querySelector('.term3');
+        const term4El = document.querySelector('.term4');
+        const term5El = document.querySelector('.term5');
+        const term6El = document.querySelector('.term6');
+    
+
+        link.forEach(el => {
+            el.addEventListener('click', () => {
+                sliderEl.querySelector('.active')?.classList.remove('active');
+                el.classList.add('active');
+                const attr = el.getAttribute('language');
+                text1El.innerText = data[attr].text1;
+                text2El.innerText = data[attr].text2;
+                term1El.innerText = data[attr].term1;
+                term2El.innerText = data[attr].term2;
+                term3El.innerText = data[attr].term3;
+                term4El.innerText = data[attr].term4;
+                term5El.innerText = data[attr].term5;
+                term6El.innerText = data[attr].term6;
+              
+            });
+        });
+
+    
+        var data = {
+            "english":
+            {
+                "text1": " Receive your activation code by SMS",
+                "text2": " Enter your mobile phone number:",
+                "term1": " This service is available to Saudi Telecom Company customers for 1.5 riyals for prepaid customers, renewed daily , and for 51.75 riyals for post-paid customers, renewed monthly (including 15% value-added tax). To cancel the subscription, please send U 500 to 801848",
+                "term2": " The Tax amount was collected to prepaid customers upon charging",
+                "term3": " This service is available for Mobily customers for 1.725 SAR renewed daily (including VAT).",
+                "term4": " To cancel your subscription, please send U 500 to 600609",
+                "term5": " The Tax amount was collected to prepaid customers upon charging",
+                "term6": " For support, call us at <span>+966118343426</span>."
+    
+            },
+            "japanese":
+            {
+                "text1": " SMS でアクティベーション コードを受け取る",
+                "text2": " 携帯電話番号を入力してください:",
+                "term1": " このサービスは、Saudi Telecom Company のお客様が、前払いのお客様は 1.5 リヤルで毎日更新され、後払いのお客様は 51.75 リヤルで毎月更新されます (15% の付加価値税を含む)。サブスクリプションをキャンセルするには、U 500 を 801848 に送信してください。",
+                "term2": "税額は、請求時にプリペイド顧客に徴収されました",
+                "term3": " このサービスは、毎日更新される 1.725 SAR (VAT を含む) で Mobily のお客様にご利用いただけます。",
+                "term4": " サブスクリプションをキャンセルするには、U 500 を 600609 に送信してください",
+                "term5": " 税額は、請求時にプリペイド顧客に徴収されました",
+                "term6": " サポートが必要な場合は、<span>+966118343426</span> までお電話ください."
+    
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

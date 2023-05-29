@@ -1,0 +1,309 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<title>Universo gamer</title>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type="text/css" rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+
+	<script type="text/javascript">
+		vms.lp = {
+			selectors: {
+				menu: '.menu',
+				loader: '#loader',
+				msisdn_input: '#msisdn_input',
+				otp_input: '#otp-input',
+				error: '#error',
+				lang_btn: '#lang_btn',
+				lang_flag: '#lang_flag',
+				subscribe: '#subscribe'
+			},
+			init: function () {
+				vms.init()
+			},
+			onFlowChange(flow, step) {
+
+			},
+			showError(message, reason) {
+				vms.selectors.error.innerHTML = message
+				vms.selectors.error.style.display = 'block'
+				this.vibrate(vms.selectors.subscribe)
+				this.vibrate(vms.selectors.error)
+				// alert(message)
+			},
+			vibrate(selector) {
+				selector.classList.add('vibration')
+				setTimeout(() => selector.classList.remove('vibration'), 3000)
+			},
+			onLocaleChange(lang, locale, altLocale) {
+				vms.selectors.lang_flag.setAttribute('src', `./imgs/${altLocale.country_code}.png`)
+			}
+		}
+	</script>
+
+</head>
+
+<body>
+	<div class="container">
+
+		<!-- Language select begins-->
+		<a href="javascript:void(0);" id="lng_select" onclick="btnLng();">
+			<span lng-a>العربية</span>
+			<span lng-b class="ltr">English</span>
+		</a>
+		<!-- Language select ends -->
+
+		<div class="header">
+			<p lng-a>
+				Etisalat: 2 AED/day, VAT Incl. <br />
+				du: 12.6 AED/week, VAT Incl.
+			</p>
+			<p lng-b>
+				اتصالات: <span class="ltr">2</span> دراهم في اليوم شامل ضريبة القيمة المضافة. <span
+					class="ltr">Du</span>: <span class="ltr">12.6</span>درهم/اسبوعياً شامل ضريبة القيمة المضافة
+
+			</p>
+		</div>
+
+		<div id="form">
+			<span class="logo"></span>
+			<h1>
+				<span lng-a>An universe of games</span>
+				<span lng-b>هذه الخدمة هي البوابة التي تتيح لك</span>
+			</h1>
+			<h2>
+				<span lng-a>at your fingertips</span>
+				<span lng-b>الوصول إلى ألعاب <span class="ltr">HTML5</span> الرائعة.</span>
+			</h2>
+
+			<!--Paso 01 -->
+
+			<div id="mobile_box" class="active">
+				<div class="input_group anim">
+					<span class="label strong">
+						<i class="icon icon-phone"></i>
+						<span lng-a>Enter your mobile to receive OTP</span>
+						<span lng-b>أدخل رقم هاتفك للتنزيل</span>
+					</span>
+					<input id="mobile" type="tel" value="971" class="totheend" placeholder="Mobile Number"
+						onfocus="if(typeof moveCursorToEnd != 'undefined') moveCursorToEnd(this, true)"
+						autofocus="autofocus" onKeyPress="return validar(event)" autocomplete="tel" maxlength="16">
+				</div>
+
+				<div class="button-container">
+					<a id="submit_btn_mobile" href="javascript:void(0);" class="button">
+						<span lng-a class="text">Subscribe</span>
+						<span lng-b class="text">اشترك</span>
+						<i class="icon-btn"></i>
+						<span class="shine-container">
+							<span class="shine"></span>
+						</span>
+					</a>
+
+					<a id="loading_btn_mobile" href="javascript:void(0);" class="button" style="display: none;">
+						<span lng-a class="text">Hold on...</span>
+						<span lng-b class="text">إستمر</span>
+						<i class="icon-btn"></i>
+						<span class="shine-container">
+							<span class="shine"></span>
+						</span>
+					</a>
+					<div class="light"></div>
+					<div class="disclaimer">
+						<a href="javascript:void(0)" onclick="close_window();"
+							style="color:#666666;text-decoration:none;">
+							<span lng-a>[ Exit ]</span>
+							<span lng-b>[ خروج ]</span>
+						</a>
+
+						<br><br>
+
+						<span lng-a>
+							Etisalat: 2 AED/day, VAT Incl. <br />
+							du: 12.6 AED/day, VAT Incl.
+						</span>
+						<span lng-b>
+							اتصالات: <span class="ltr">2</span> دراهم في اليوم شامل ضريبة القيمة المضافة. <span
+								class="ltr">Du</span>: <span class="ltr">12.6</span>درهم/اسبوعياً شامل ضريبة القيمة
+							المضافة
+
+						</span>
+					</div>
+				</div>
+				<!-- -->
+			</div>
+
+			<!--Paso 02 -->
+
+			<div id="pin_box">
+				<div class="input_group anim">
+					<span class="label strong">
+						<span lng-a>Enter the OTP received by SMS</span>
+						<span lng-b>دخل الرمز الشخصي الذي تلقيته على جوالك</span>
+					</span>
+					<input type="tel" id="pin" placeholder="OTP" onkeypress="return validar(event)" maxlength="4"
+						autocomplete="one-time-code" />
+				</div>
+				<div class="button-container">
+					<a id="submit_btn_pin" href="javascript:void(0);" class="button">
+						<span lng-a class="text">Confirm</span>
+						<span lng-b class="text">للتأكيد</span>
+						<i class="icon-btn"></i>
+						<span class="shine-container">
+							<span class="shine"></span>
+						</span>
+					</a>
+
+					<a id="loading_btn_pin" href="javascript:void(0);" class="button" style="display: none;">
+						<span lng-a class="text">Hold on...</span>
+						<span lng-b class="text">إستمر</span>
+						<i class="icon-btn"></i>
+						<span class="shine-container">
+							<span class="shine"></span>
+						</span>
+					</a>
+					<div class="light"></div>
+					<div class="disclaimer">
+						<a href="javascript:void(0)" onclick="close_window();"
+							style="color:#666666;text-decoration:none;">
+							<span lng-a>[ Exit ]</span>
+							<span lng-b>[ خروج ]</span>
+						</a>
+
+						<br><br>
+
+						<span lng-a>
+							Etisalat: 2 AED/day, VAT Incl. <br />
+							du: 12.6 AED/week, VAT Incl.
+						</span>
+						<span lng-b>
+							اتصالات: <span class="ltr">2</span> دراهم في اليوم شامل ضريبة القيمة المضافة. <span
+								class="ltr">Du</span>: <span class="ltr">12.6</span>درهم/اسبوعياً شامل ضريبة القيمة
+							المضافة
+
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<!--Paso 03 -->
+
+			<div id="resultado">
+				<p>
+					<span lng-a>You will receive the required content soon!</span>
+					<span lng-b>ستقوم باستلام المحتوى المطلوب قريبا!</span>
+				</p>
+			</div>
+
+		</div>
+
+		<!-- Footer begins-->
+
+		<div class="footer">
+
+
+			<ul lng-a>
+
+				After 24 hours free trial, Etisalat subscribers will be charged AED 2/day automatically and Du
+				subscribers will be charged 12.6 AED/week. Prices are VAT inclusive. This service have no commitment,
+				Etisalat subscribers can cancel anytime by sending C UD to 1111 and Du subscribers can cancel anytime by
+				sending UNSUB UGW to 2827. Free trial applicable only for first time subscribers. Enjoy your Free trial
+				for 24 hours. To make use of this service, you must be more than 18 years old or have received
+				permission from your parents or person who is authorized to pay your bill. For help, please contact our
+				support team: support@universo.fun. By subscribing to the service, you are accepting all Terms &
+				Conditions of the service & authorize du to share your mobile number with our partner, who manages this
+				subscription service. For Complete T&C <a href="../terms/unigam_daily_eng.html" target="_blank"
+					style="color: inherit;">click here</a>.
+				<br>
+
+				Please make sure that your browser is not using any 3rd-party blocking technologies and you have a
+				healthy internet connection for swift access to the content
+
+			</ul>
+			<ul lng-b>
+				سيتم فرض رسوم على مشتركي اتصالات بقيمة <span class="ltr">2</span> درهمًا إماراتيًا في اليوم تلقائيًا و
+				سيتم فرض رسوم على مستخدمي <span class="ltr">Du</span> بقيمة <span class="ltr">12.6</span> درهمًا
+				إماراتيًا / أسبوعًا شاملاً ضريبة القيمة المضافة. الأسعار شاملة ضريبة القيمة المضافة.هذه الخدمة ليست
+				ملزمة ، يمكن لمستخدمي اتصالات إلغاء الاشتراك من الخدمة في أي وقت عن طريق إرسال <span class="ltr">C
+					UD</span> إلى <span class="ltr">1111</span> ، ويمكن لمستخدمي <span class="ltr">Du</span> إلغاء
+				الاشتراك من الخدمة في أي وقت عن طريق إرسال <span class="ltr">UNSUB UGW</span> إلى <span
+					class="ltr">2827</span>. الإصدار التجريبي المجاني ينطبق فقط على المشتركين لأول مرة. استمتع بالخدمة
+				مجاناً لمدة <span class="ltr">24</span> ساعة. للاستفادة من هذه الخدمة ، يجب أن يكون عمرك أكثر من <span
+					class="ltr">18</span> عامًا أو حصلت على إذن من والديك أو الشخص المخول بدفع فاتورتك. للحصول على
+				المساعدة ، يرجى الاتصال بفريق الدعم الخاص بنا: <span class="ltr">support@universo.fun</span>. بالاشتراك
+				في الخدمة ، فإنك تقبل جميع شروط وأحكام الخدمة وتفوض du لمشاركة رقم هاتفك المحمول مع شريكنا الذي يدير
+				خدمة الاشتراك هذه. <a href="../terms/unigam_daily_ara.html" style="color: inherit;"
+					target="_blank">للحصول على الشروط والأحكام الكاملة ، انقر هنا </a> .<br>
+
+				يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر تابعة لخدمات الطرف الثالث وأن لديك اتصال إنترنت صحي
+				للوصول السريع إلى المحتوى
+			</ul>
+		</div>
+
+		<!-- Footer ends -->
+
+	</div>
+
+
+
+	<input type="hidden" id="subId" />
+	<input type="hidden" id="evina_token" />
+
+	<input type="hidden" id="transaction_id" />
+	<input type="hidden" id="club" value="1681!UniGam-1-3-TNB" />
+
+	<input type="hidden" id="offer_id" value="4293" />
+	<input type="hidden" id="url_id" value="10492" />
+
+	<script type="text/javascript" src="js/getParams.js"></script>
+	<script type="text/javascript" src="js/ga.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("[lng-a]").toggleClass("visible");
+		});
+
+		function btnLng() {
+			$("[lng-a],[lng-b]").toggleClass("visible");
+		}
+
+		function validar(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8) return true;
+			patron = /\d/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te)
+		}
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-451274008"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'AW-451274008');
+		gtag('config', 'AW-10900872282');
+		gtag('config', 'AW-590224479');
+
+	</script>
+	<script>
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date(); a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-96543013-1', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+</body>
+
+</html>
