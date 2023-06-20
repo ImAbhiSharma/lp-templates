@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>lp08</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body onload="move()">
+
+
+    <div class="lp_page">
+        <div class="full_overlay"></div>
+        <div class="wrapper">
+
+
+            <!-- WRAPPER FOR LANGUAGE AND OTHERS -->
+
+
+            <div class="header">
+                
+                <div class="header_left">
+                    <a href="#">
+                        <div class="service_logo" id="service_logo"></div>
+                    </a>
+                </div>
+
+                <div class="header_center">
+                    <p id="ae_tnc" class="ae_tnc">Best Games & Apps</p>
+                </div>
+
+                <!-- <div class="header_right langSelect">
+                    <span class='dt-use-en-only'>
+                        <a href="#" class="langBtn" onclick="lang_change('en')"
+                            style="<?php echo $language == 'en' ? 'display:none' : '';?>">
+                            <div>English</div>
+                        </a>
+                    </span>
+                    <span class='dt-use-ar-only'>
+                        <a href="#" class="langBtn" onclick="lang_change('ar')"
+                            style="<?php echo $language == 'ar' ? 'display:none' : '';?>">
+                            <div>العربية</div>
+                        </a></span>
+                </div> -->
+
+                <select class="header_right lang-select langBtn ">
+                    <option value="en" language="English" class="active">EN</option>
+                    <option value="ar" language="" >العربية</option>
+                </select>
+                
+
+                <div class="clear"></div>
+            </div>
+
+
+            <!--WRAPPER FOR CONTENT-->
+
+            <div class="content loading">
+
+                <div class="content_div">
+
+                    <div class="progressBar">
+                        
+                        <div class="progressBar__loader complete" id="progressLoader" style="width:10%; color: #fff;">
+                            <!-- <span class="count front" id="count" ></span> -->
+                        </div>
+                        
+                        <!-- <div class="progressBar__loader" id="progressLoader">
+                            <span class="count front" style="width: 500px;">100 %</span>
+                        </div> -->
+                        <!-- <span class="count back"></span> -->
+
+                    </div>
+
+
+                    <div class="loading_title"></div>
+                    <div class="title_main ready">Your file is ready to download</div>
+                    <div class="formWrap">
+                        <div id="instructions" class="instructions display_1">
+                            Enter your mobile number to subscribe:
+                        </div>
+
+                        <div name="telcoInput">
+                            <div class="formElm formElm--prefix">
+                                <div class="prefixCode">
+                                    <div class="smartphone">
+                                        <div></div>
+                                    </div>
+                                    <span>(+966)</span>
+                                </div>
+                                <input type="tel" id="msisdn" class="msisdn glow_me" value="" maxlength="9"
+                                    onfocus="var temp=this.value; this.value=''; this.value=temp" autofocus="true">
+
+                                <div class="msisdnArrow animate-arrow" style="color: (arrow_colour, #328cf6); ">
+                                    <i class="gg-arrow-right-o arrow1"></i>
+                                </div>
+                            </div>
+
+                            <span id="txt_msisdn_error" class="error txt_msisdn_error" style="display:none;">
+                                Wrong mobile number! Please try again using the correct mobile number.
+                            </span>
+
+                            <span id="txt_request_error" class="error txt_request_error" style="display:none;">
+                                Wrong mobile number! Please try again using the correct mobile number.</span>
+                            <span id="txt_no_service_error" class="error txt_no_service_error" style="display:none;">
+                                General error! Please re-try again.
+                            </span>
+                            
+                            <span id="txt_checkbox_error" class="error txt_checkbox_error" style="display:none;"></span>
+                            
+                            <span id="txt_hlr_error" class="error txt_hlr_error" style="display:none;">
+                                Best Games & Apps
+                            </span>
+
+                            <div class="formElm1">
+                                <button id="button" type="button" class="button disabled_btn"
+                                    onclick="sub_frm_request();" disabled>Subscribe
+                                    Now!</button>
+                                <div class="lds-dual-ring" id="button-loading"
+                                    style="position:relative;top:-70px;height:0;display:none;">
+                                </div>
+                            </div>
+                            <div class="rate_below_btn" style="color:(rate_color,#fff);"></div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!--WRAPPER FOR FOOTER-->
+
+
+                <div class="footer">
+
+                    <div class="tnc_1"><br>
+                        <br>
+                        <li>This Service is available for STC Customers</li>
+                        <li>It costs 2 Riyals renewed daily for prepaid subscribers, and costs 69 Riyals renewed monthly
+                            for postpaid subscribers (VAT Included).</li>
+                        <li>To unsubscribe send U 11 to 801751.</li>
+                        <li>VAT Tax was already paid with refill card for prepaid subscribers.</li>
+                        <li>For Mobily users, Free for 3 days, then 2 SAR per day will be charged.</li>
+                        <li>To unsubscribe please send U 98 to 606068.</li>
+                        <li>For Zain users, 1 SAR per day will be charged. To unsubscribe please send U 61 to 709222.
+                        </li>
+
+                    </div>
+
+                    <div class="tnc_btm">
+                        <div class="copyright_text" id="copyright_text_tnc">
+                            <a href="#" target="_blank" style="color: #8b8b8b;">TNC</a>
+                        </div>
+                        <div class="copyright_text" id="copyright_text_privacy">
+                            <a href="#" target="_blank" style="color: #8b8b8b;">Privacy and policy</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="pin_ver" style="display: none;">
+        <div class="full_overlay"></div>
+        <div class="wrapper">
+
+
+            <!-- WRAPPER FOR LANGUAGE AND OTHERS -->
+            
+            <div class="header">
+                <div class="header_left">
+                    <a href="#">
+                        <div class="service_logo" id="service_logo"></div>
+                    </a>
+                </div>
+                <div class="header_center">
+                    <p id="ae_tnc" class="ae_tnc">Best Games & Apps</p>
+                </div>
+
+                <!-- <div class="header_right">
+                    <span class='dt-use-en-only'><a href="#" class="langBtn" onclick="lang_change('en')"
+                            style="<?php echo $language == 'en' ? 'display:none' : '';?>">
+                            <div>English</div>
+                        </a></span><span class='dt-use-ar-only'><a href="#" class="langBtn" onclick="lang_change('ar')"
+                            style="<?php echo $language == 'ar' ? 'display:none' : '';?>">
+                            <div>العربية</div>
+                        </a></span>
+                </div> -->
+
+                <select class="header_right lang-select langSelect ">
+                    <option value="en" language="English" class="active langBtn">EN</option>
+                    <option value="ar" language="" class="langBtn">العربية</option>
+                </select>
+
+                <div class="clear"></div>
+            </div>
+
+            <!--WRAPPER FOR CONTENT-->
+
+
+            <div class="content loading">
+
+                <div class="content_div">
+                    <div class="progressBar">
+                        <div class="progressBar__loader" id="progressLoader">
+                            <span class="count front" id="count"></span>
+                        </div>
+                        <!--<div class="progressBar__loader" id="progressLoader"><span class="count front" style="width: 500px;">100 %</span></div>-->
+                        <span class="count back"></span>
+                    </div>
+                    <!--  <div class="loading_title">[[ lang(loading_title) ]]</div>-->
+                    <div class="title_main ready">Your file is ready to download</div>
+                    <div class="formWrap">
+                        <div class="display_2 pin_instruction">We have sent you with PIN Code! Please enter your received PIN Code below:</div>
+                        <div class="formElm ">
+                            <div class="prefixCode">
+                                <div class="smartphone">
+                                    <div></div>
+                                </div>
+                                <span>(+966)</span>
+                            </div>
+
+                            <input type="tel" id="pin" class="msisdn_pin pin" value="" maxlength="">
+                            <div class="msisdnArrow animate-arrow" style="color: (arrow_colour, #328cf6) ">
+                                <i class="gg-arrow-right-o arrow1"></i>
+                            </div>
+                        </div>
+                        <div class="formElm1">
+                            <button id="button_pin" type="button" class="button_pin pin_btn disabled_btn" onclick="sub_frm_verify()" disabled>Confirm!</button>
+                            <div class="lds-dual-ring" id="button-loading_pin"
+                                style="position:relative;top:-70px;height:0;display:none;">
+                            </div>
+                        </div>
+                        <div class="rate_below_btn rate_below_btn_pin" style="color:(rate_color,#fff);"></div>
+                        
+                        <span id="txt_pin_error" class="error txt_pin_error" style="display:none;">
+                            Please enter correct PIN code!
+                        </span>
+                        
+                        <span id="txt_pin_verify_error" class="error txt_pin_verify_error" style="display:none;">
+                            Wrong PIN code entry! Please reconfirm and recheck.
+                        </span>
+
+                    </div>
+                </div>
+
+                <!--WRAPPER FOR FOOTER-->
+
+                <div class="footer">
+
+                    <div class="tnc_1"><br>
+                        <br>
+                        <li>This Service is available for STC Customers</li>
+                        <li>It costs 2 Riyals renewed daily for prepaid subscribers, and costs 69 Riyals renewed monthly
+                            for postpaid subscribers (VAT Included).</li>
+                        <li>To unsubscribe send U 11 to 801751.</li>
+                        <li>VAT Tax was already paid with refill card for prepaid subscribers.</li>
+                        <li>For Mobily users, Free for 3 days, then 2 SAR per day will be charged.</li>
+                        <li>To unsubscribe please send U 98 to 606068.</li>
+                        <li>For Zain users, 1 SAR per day will be charged. To unsubscribe please send U 61 to 709222.
+                        </li>
+                    </div>
+
+                    <div class="tnc_btm">
+                        <div class="copyright_text" id="copyright_text_tnc">
+                            <a href="#" target="_blank" style="color: #8b8b8b;">TNC</a></div>
+                        <div class="copyright_text" id="copyright_text_privacy">
+                            <a href="#" target="_blank" style="color: #8b8b8b;">Privacy and policy</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- <script>
+        const layout = "<?php if($language == 'ar'){echo 'ar_layout';} ?>";
+        $(function () {
+            var duration = 1500;
+            $("#count").prop("number", 0).animateNumber({
+                number: 100,
+                numberStep: $.animateNumber.numberStepFactories.append(' %')
+            }, {
+                easing: "linear",
+                duration,
+            });
+            $("#progressLoader").animate({
+                width: "100%",
+            }, {
+                complete: function () {
+                    document.getElementById('progressLoader').classList.add('complete');
+                },
+                duration,
+            });
+
+            $("#count").animate({
+                width: "500px",
+            }, {
+                duration
+            });
+
+            layout == "ar_layout" ? document.getElementsByTagName("html")[0].classList.add("ar_layout") : "";
+
+            const aeTnc = document.getElementById("ae_tnc").innerHTML;
+            aeTnc == "" ? (document.getElementById("ae_tnc").style.display = "none") : (document.getElementById("ae_tnc").style.display = "block");
+            const select = document.getElementsByTagName("select"),
+                pin = document.getElementsByClassName("pin");
+            let opSelected;
+
+            const msisdnMaxVal = $(".msisdn").attr("maxLength") - 1,
+                pinMaxVal = $("#pin").attr("maxLength") - 1;
+
+            select.length > 0 ? initWithOP() : initWithOutOP();
+
+            function initWithOP() {
+                opSelected = false;
+                if ($(".formElm--btn").length > 0 && $("#msisdn_input").length == 1) {
+                    $(".formElm--btn").addClass("glow_me");
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                    $(".msisdn, select").removeClass("glow_me");
+                } else {
+                    $("select").addClass("glow_me");
+                    $(".msisdn, .formElm--btn").removeClass("glow_me glow_me_only");
+                }
+                //select
+                //   opSelected = false;
+                //   $("select").addClass("glow_me");
+                //   $(".msisdn, .formElm--btn").removeClass("glow_me glow_me_only").prop('disabled', true);
+            }
+
+            function initWithOutOP() {
+                opSelected = true;
+
+                if ($(".msisdn").length > 0 && $("div[id^='msisdn_wrap']").length == 0) {
+                    $(".msisdn").addClass("glow_me");
+                    $(".formElm--btn, select").removeClass("glow_me");
+                } else if ($(".formElm--btn").length == 1) {
+                    $(".formElm--btn").addClass("glow_me");
+                    $(".msisdn, select").removeClass("glow_me");
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                } else if ($(".button").length > 1) {
+                    $(".formElm--btn").addClass("glow_me_only");
+                    $(".msisdn, select, div[id^='msisdn_wrap'] .formElm--btn ").removeClass("glow_me glow_me_only");
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                } else {
+                    $(".msisdn, select, .formElm--btn").removeClass("glow_me glow_me_only");
+                }
+            }
+
+            $("select").change(function () {
+                if ($(this)[0].selectedIndex <= 0) {
+                    opSelected = false;
+                    $("select").addClass("glow_me");
+                    $(".msisdn, .formElm--btn").removeClass("glow_me");
+                } else if ($(this)[0].selectedIndex > 0 && $(".msisdn").val().length >= msisdnMaxVal) {
+                    opSelected = true;
+                    $(".formElm--btn").addClass("glow_me");
+                    $(".msisdn, select").removeClass("glow_me");
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                } else {
+                    opSelected = true;
+                    $(".msisdn").addClass("glow_me");
+                    $(".formElm--btn, select").removeClass("glow_me");
+                }
+            });
+
+            $(".msisdn").keydown(function () {
+                if (opSelected && $(this).val().length >= msisdnMaxVal) {
+                    $(".formElm--btn").addClass("glow_me");
+                    $(".msisdn, select").removeClass("glow_me");
+                    $(".button").removeClass("disabled_btn").prop('disabled', false);
+                    $(".button").css({
+                        'color': '',
+                        'border': '',
+                        'background': ''
+                    });
+                } else if (!opSelected && $(this).val().length >= msisdnMaxVal) {
+                    $("select").addClass("glow_me");
+                    $(".msisdn, .formElm--btn").removeClass("glow_me");
+                } else if (opSelected && $(this).val().length <= msisdnMaxVal) {
+                    $(".msisdn").addClass("glow_me");
+                    $(".formElm--btn, select").removeClass("glow_me");
+                    var str = $('.button').attr('class');
+                    var n = str.includes("disabled_btn");
+                    console.log(str, n);
+                    if (n == false) {
+                        $(".button").addClass("disabled_btn").prop('disabled', true);
+                    }
+                }
+            });
+
+            $(".button").ready(function () {
+                if ($(".button").length > 3) {
+                    var formElm = $('.formElm1');
+                    formElm.addClass("formElm--btn");
+                    formElm.removeClass("formElm1");
+                } else if ($(".button").length < 3) {
+                    var formElm = $('.formElm1');
+                    formElm.removeClass("formElm--btn");
+                    formElm.addClass("formElm1");
+                }
+            })
+
+            $("a.display_1").click(function () {
+                $(".msisdn, select, div[id^='msisdn_wrap'] .formElm--btn, .formElm--btn ").removeClass("glow_me glow_me_only");
+                select.length > 0 ? initWithOP() : initWithOutOP();
+            });
+        });
+
+    </script> -->
+
+    <!-- <script>
+        function move() {
+            var duration = 1500;
+            $("#count").prop("number", 0).animateNumber({
+                number: 100,
+                numberStep: $.animateNumber.numberStepFactories.append(' %')
+            }, {
+                easing: "linear",
+                duration,
+            });
+            $("#progressLoader").animate({
+                width: "100%",
+            }, {
+                complete: function () {
+                    document.getElementById('progressLoader').classList.add('complete');
+                },
+                duration,
+            });
+
+            $("#count").animate({
+                width: "500px",
+            }, {
+                duration
+            });
+        }
+
+
+
+    </script> -->
+
+
+    <script>
+        function move() {
+          var elem = document.getElementById("progressLoader");   
+          var width = 20;
+          var id = setInterval(frame, 10);
+          function frame() {
+            if (width >= 100) {
+              clearInterval(id);
+            } else {
+              width++; 
+              elem.style.width = width + '%'; 
+              elem.innerHTML = width * 1  + '%';
+            }
+          }
+        }
+        </script>
+    
+
+
+   
+    
+    
+
+</body>
+
+</html>
