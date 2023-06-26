@@ -136,23 +136,6 @@
         img {
             vertical-align: text-top;
         }
-        input[type="button"],
-        input[type="submit"] {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            background-color: #dddddd;
-            color: black;
-            border-width: 2px;
-            border-style: outset;
-            border-color: buttonface;
-            border-image: initial;
-            border-radius: 0;
-        }
-
-        input[type="button"]:hover,
-        input[type="submit"]:hover {
-            cursor: pointer;
-        }
   
       
         
@@ -456,11 +439,7 @@
             color: #000;
         }
 
-        .direct_flow .step_firstclic .cta,
-        .direct_flow .step_direct .cta {
-            z-index: 52;
-            position: relative;
-        }
+        
 
         @media screen and (min-width:1024px) and (orientation:landscape) {
             .wl_popup .form {
